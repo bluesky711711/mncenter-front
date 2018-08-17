@@ -9,6 +9,7 @@ use App\Masternode;
 use App\Setting;
 use App\Reward;
 use GuzzleHttp\Client;
+use App\Http\Controllers\Rpc\jsonRPCClient;
 use Log;
 class MasternodeController extends Controller
 {
@@ -75,9 +76,6 @@ class MasternodeController extends Controller
       $coin->queue_masternode = null;
       if ($masternode) $coin->queue_masternode = $masternode;
       Log::info($coin->queue_masternode);
-      //$res = $client->get('https://api.coinmarketcap.com/v1/ticker/'.$coin->coin_name);
-      //$result = $this->CallAPI('GET', 'https://api.coinmarketcap.com/v1/ticker/'.$coin->coin_name);
-      //Log::info($res);
     }
 
 
@@ -114,5 +112,12 @@ class MasternodeController extends Controller
       'rewards' => $rewards,
       'coin' => $coin,
     ]);
+  }
+
+  public function addseats(Request $request){
+    $coin_id = $request->input('coind_id');
+    $masternode_id = $request->input('masternode_id');
+    $user_id = Auth::user()->id;
+
   }
 }

@@ -24,9 +24,7 @@
       <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
 
       <div class="green-alert">
-
         New masternodes will be handled between 19-22 hrs UTC.
-
       </div>
     </div>
 
@@ -136,23 +134,15 @@ $(document).ready(function(){
 
     $( ".openSlide" ).slideUp( "fast", function() {
       $( ".tabActive" ).removeClass( "tabActive" );
-
     });
 
     $( "#1stslide-" + indid ).slideDown( "fast", function() {
       $( "#atab-" + indid ).removeClass( "tabinActive").addClass("tabActive");
-
     });
-
-
-
   });
 });
 </script>
 <script type="text/javascript">
-// $(function(){
-//   SyntaxHighlighter.all();
-// });
 $(window).load(function(){
   $('.flexslider').flexslider({
     animation: "fade",
@@ -168,5 +158,4 @@ $(window).load(function(){
   });
 });
 </script>
-
 @endsection

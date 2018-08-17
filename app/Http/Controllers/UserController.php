@@ -10,7 +10,9 @@ use App\Coin;
 use App\Masternode;
 use App\Transaction;
 use App\Reward;
+use App\Wallet;
 use App\User;
+use App\Http\Controllers\Rpc\jsonRPCClient;
 use Log;
 class UserController extends Controller
 {
@@ -32,7 +34,10 @@ class UserController extends Controller
      */
     public function balances()
     {
+
       $coins = Coin::all();
+
+      $user = Auth::user();
 
       foreach ($coins as $coin){
         $masternodes = Masternode::where('coin_id', $coin->id)->where('status', 'completed')->get();
@@ -41,12 +46,27 @@ class UserController extends Controller
         $masternode = Masternode::where('coin_id', $coin->id)->where('status', 'preparing')->first();
         $coin->queue_masternode = null;
         if ($masternode) $coin->queue_masternode = $masternode;
-        Log::info($coin->queue_masternode);
-        $coin->user_balance = 0;
-        //$res = $client->get('https://api.coinmarketcap.com/v1/ticker/'.$coin->coin_name);
-        //$result = $this->CallAPI('GET', 'https://api.coinmarketcap.com/v1/ticker/'.$coin->coin_name);
-        //Log::info($res);
+
+        $wallet = Wallet::where('coin_id', $coin->id)->where('user_id', $user->id)->first();
+        if ($wallet && $wallet->wallet_address != ''){
+          $coin->user_balance = $wallet->balance;
+        } else {
+          $rpc_user = $coin->rpc_user;
+          $rpc_password = $coin->rpc_password;
+          $rpc_port= $coin->rpc_port;
+          $client = new jsonRPCClient('http://'.$rpc_user.':'.$rpc_password.'@88.208.229.104:'.$rpc_port.'/');
+          $address = $client->getaccountaddress($user->id);
+          $balance = $client->getbalance($user->id);
+          $wallet = Wallet::create([
+            'coin_id' => $coin->id,
+            'user_id' => $user->id,
+            'wallet_address' => $address,
+            'balance' => $balance
+          ]);
+          $coin->user_balance = $balance;
+        }
       }
+
 
         return view('balances', [
           'page' => 'balances',
@@ -115,4 +135,13 @@ class UserController extends Controller
           'rewards' => $rewards
         ]);
     }
+
+    public function deposit(Request $request){
+      $coin_id = $request->input('coin_id');
+    }
+
+    public function withdraw(Request $request){
+      $coin_id = $request->input('coin_id');
+    }
+
 }
