@@ -34,49 +34,79 @@ class UserController extends Controller
      */
     public function balances()
     {
-
       $coins = Coin::all();
-
       $user = Auth::user();
 
       foreach ($coins as $coin){
+        if ($coin->status != "Active"){
+          $coin->user_balance = 0;
+          $coin->address = "unknow";
+          continue;
+        }
+
         $masternodes = Masternode::where('coin_id', $coin->id)->where('status', 'completed')->get();
         $coin->completed_mn_count = count($masternodes);
 
         $masternode = Masternode::where('coin_id', $coin->id)->where('status', 'preparing')->first();
         $coin->queue_masternode = null;
         if ($masternode) $coin->queue_masternode = $masternode;
-
+        $coin->user_balance = 0;
         $wallet = Wallet::where('coin_id', $coin->id)->where('user_id', $user->id)->first();
-        if ($wallet && $wallet->wallet_address != ''){
-          $coin->user_balance = $wallet->balance;
+        $rpc_user = $coin->rpc_user;
+        $rpc_password = $coin->rpc_password;
+        $rpc_port= $coin->rpc_port;
+        $rpc_ip= $coin->rpc_ip;
+
+        $client = new jsonRPCClient('http://'.$rpc_user.':'.$rpc_password.'@'.$rpc_ip.':'.$rpc_port.'/');
+
+        if ($wallet->wallet_address && $wallet->wallet_address != ''){
+          $address = $wallet->wallet_address;
         } else {
-          $rpc_user = $coin->rpc_user;
-          $rpc_password = $coin->rpc_password;
-          $rpc_port= $coin->rpc_port;
-          $client = new jsonRPCClient('http://'.$rpc_user.':'.$rpc_password.'@88.208.229.104:'.$rpc_port.'/');
-          $address = $client->getaccountaddress($user->id);
-          $balance = $client->getbalance($user->id);
-          $wallet = Wallet::create([
-            'coin_id' => $coin->id,
-            'user_id' => $user->id,
-            'wallet_address' => $address,
-            'balance' => $balance
-          ]);
-          $coin->user_balance = $balance;
+          $address = $client->getaccountaddress("$user->id");
+          $wallet->wallet_address = $address;
         }
+
+        $addresses = $client->listaddressgroupings();
+        $balance = 0;
+        foreach ($addresses as $item) {
+          foreach ($item as $address){
+            if ( $address[0] == $wallet->wallet_address){
+              $balance = $address[1];
+            }
+          }
+        }
+
+        $gas_fee = $client->estimatefee(5);
+
+        $coin->tx_fee = $gas_fee;
+        $wallet->balance = $balance;
+        $coin->user_balance = $balance;
+        $coin->address = $address;
+        $wallet->save();
       }
 
-
-        return view('balances', [
+      return view('balances', [
           'page' => 'balances',
           'coins' => $coins,
-        ]);
+      ]);
     }
 
     public function home()
     {
         return view('home', []);
+    }
+
+    public function withdraw_post(Request $request){
+      $user = Auth::user();
+      $coin = Coin::where('id', $request->coin_id)->first();
+      $amount = $request->input('amount');
+      $wallet = Wallet::where('user_id', $user->id)->where('coin_id', $coin->id)->first();
+      $to_address = $request->input('to_address');
+      $rpc_user = $coin->rpc_user;
+      $rpc_password = $coin->rpc_password;
+      $rpc_port= $coin->rpc_port;
+      $client = new jsonRPCClient('http://'.$rpc_user.':'.$rpc_password.'@88.208.229.104:'.$rpc_port.'/');
+      $res = $client->sendfrom("$user->id", $to_address, $amount);
     }
 
     public function withdrawal_history()
@@ -127,7 +157,6 @@ class UserController extends Controller
               $reward_mn_total = $reward_mn_total + $item->reward_amount;
             }
             $reward->mn_total = $reward_mn_total;
-
         }
 
         return view('reward_history', [

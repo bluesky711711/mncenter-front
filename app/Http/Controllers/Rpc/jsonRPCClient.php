@@ -1,4 +1,5 @@
 <?php
+namespace App\Http\Controllers\Rpc;
 class jsonRPCClient {
     /*
      * Debug state
@@ -79,8 +80,8 @@ class jsonRPCClient {
             }
             $this->debug && $this->debug .= '**** Server response ****'."\n".$response."\n".'**** End of server response *****'."\n\n";
             $response = json_decode($response, true);
-
          } else {
+           return null;
            throw new Exception('Unable to connect to'. $this->uri);
          }
 

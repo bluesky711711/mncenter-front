@@ -15,6 +15,5 @@ use App\Word;
 
 class Coin extends Model
 {
-	protected $fillable = ['coin_name', 'coin_symbol', 'masternode_amount', 'coin_price', 'seat_price', 'status'];
-
+	protected $fillable = ['coin_name', 'coin_symbol', 'masternode_amount', 'coin_price', 'seat_price', 'rpc_ip', 'rpc_user', 'rpc_password', 'rpc_port', 'status'];
 }

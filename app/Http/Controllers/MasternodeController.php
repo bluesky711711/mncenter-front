@@ -6,8 +6,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Coin;
 use App\Masternode;
+use Auth;
 use App\Setting;
 use App\Reward;
+use App\Wallet;
+use App\User;
+
 use GuzzleHttp\Client;
 use App\Http\Controllers\Rpc\jsonRPCClient;
 use Log;
@@ -77,8 +81,6 @@ class MasternodeController extends Controller
       if ($masternode) $coin->queue_masternode = $masternode;
       Log::info($coin->queue_masternode);
     }
-
-
     return view('masternodecoins', [
       'page' => 'masternodecoins',
       'coins' => $coins,
@@ -88,7 +90,35 @@ class MasternodeController extends Controller
   public function masternodes($id)
   {
     $coin = Coin::where('id', $id)->first();
+    $user = Auth::user();
+    if ($coin->status != "Active"){
+      $coin->user_balance = 0;
+      $coin->address = "unknow";
+    } else {
+    $coin->user_balance = 0;
+    $wallet = Wallet::where('coin_id', $coin->id)->where('user_id', $user->id)->first();
+    $rpc_user = $coin->rpc_user;
+    $rpc_password = $coin->rpc_password;
+    $rpc_port= $coin->rpc_port;
+    $rpc_ip= $coin->rpc_ip;
+    $client = new jsonRPCClient('http://'.$rpc_user.':'.$rpc_password.'@'.$rpc_ip.':'.$rpc_port.'/');
+    if ($wallet->wallet_address && $wallet->wallet_address != ''){
+      $address = $wallet->wallet_address;
+    } else {
+      $address = $client->getaccountaddress("$user->id");
+      $wallet->wallet_address = $address;
+    }
 
+    $balance = $client->getbalance("$user->id");
+    $gas_fee = $client->estimatefee(5);
+    Log::info('$gas_fee');
+    Log::info($gas_fee);
+    $coin->tx_fee = $gas_fee;
+    $wallet->balance = $balance;
+    $coin->user_balance = $balance;
+    $coin->address = $address;
+    $wallet->save();
+    }
     $masternodes = Masternode::where('coin_id', $id)->get();
     $completed_masternodes = Masternode::where('coin_id', $id)->where('status', 'Completed')->get();
     $preparing_masternode = Masternode::where('coin_id', $id)->where('status', 'Preparing')->first();
@@ -118,6 +148,5 @@ class MasternodeController extends Controller
     $coin_id = $request->input('coind_id');
     $masternode_id = $request->input('masternode_id');
     $user_id = Auth::user()->id;
-
   }
 }

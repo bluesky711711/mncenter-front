@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="/assets/vendor/chartist/chartist.min.css" />
   <!-- jQuery -->
   <script src="/js/jquery.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script> -->
 
   <!-- Bootstrap Core JavaScript -->
   <script src="/js/bootstrap.js"></script>
@@ -50,6 +51,8 @@
   <script src="/assets/vendor/flot/jquery.flot.resize.js"></script>
   <script src="/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
   <script src="/assets/vendor/chartist/chartist.js"></script>
+  <script src="/js/jquery.qrcode.min.js"></script>
+
   <script src="/js/main.js"></script>
 </head>
 

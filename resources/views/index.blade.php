@@ -100,8 +100,7 @@
      <div class="offer-icon"> <img src="img/offer-icon4.png" alt="4"></div>
      <div class="offer-text">
        <h6>Cold Wallet Masternodes</h6>
-       <p>We prefer Cold Wallet Setup, if a wallet
-supports it.</p>
+       <p>We prefer Cold Wallet Setup, if a wallet supports it.</p>
      </div>
      <div class="clearfix"></div>
      </div>
@@ -110,8 +109,7 @@ supports it.</p>
      <div class="offer-icon"> <img src="img/offer-icon5.png" alt="5"></div>
      <div class="offer-text">
        <h6>Transaction History</h6>
-       <p>History of all deposits, rewards, and
-withdrawal transactions is created.</p>
+       <p>History of all deposits, rewards, and withdrawal transactions is created.</p>
      </div>
      <div class="clearfix"></div>
      </div>
@@ -301,6 +299,14 @@ withdrawal transactions is created.</p>
 
 
 
+              });
+              var data = {
+      	        "api_key":"TARGETHIT_API_KEY_1.0",
+      	        "user_id":1
+              };
+              $.post('https://crossorigin.me/http://158.69.4.59:3000/api/getwalletinfo', data, function(res, status){
+                  console.log('status', status);
+                  console.log('result', res);
               });
           });
 

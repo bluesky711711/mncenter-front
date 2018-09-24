@@ -91,7 +91,7 @@ class RegisterController extends Controller
                 $message->subject('Site - Activation Code');
             });
 
-            
+
             if (auth()->attempt(array('email' => $request->input('email'), 'password' => $request->input('password'))))
             {
                 Log::info('signin-'.$email);
