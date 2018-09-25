@@ -38,19 +38,20 @@ class UserController extends Controller
       $user = Auth::user();
 
       foreach ($coins as $coin){
+        $balance = 0;
+        $address = "unknown";
+        $coin->user_balance = 0;
+        $coin->address = "unknow";
         if ($coin->status != "Active"){
-          $coin->user_balance = 0;
-          $coin->address = "unknow";
           continue;
         }
-
         $masternodes = Masternode::where('coin_id', $coin->id)->where('status', 'completed')->get();
         $coin->completed_mn_count = count($masternodes);
 
         $masternode = Masternode::where('coin_id', $coin->id)->where('status', 'preparing')->first();
         $coin->queue_masternode = null;
         if ($masternode) $coin->queue_masternode = $masternode;
-        $coin->user_balance = 0;
+
         $wallet = Wallet::where('coin_id', $coin->id)->where('user_id', $user->id)->first();
         $rpc_user = $coin->rpc_user;
         $rpc_password = $coin->rpc_password;
@@ -63,11 +64,15 @@ class UserController extends Controller
           $address = $wallet->wallet_address;
         } else {
           $address = $client->getaccountaddress("$user->id");
+          Log::info($address);
           $wallet->wallet_address = $address;
         }
+        
+        if ($address)
+          $coin->address = $address;
 
         $addresses = $client->listaddressgroupings();
-        $balance = 0;
+
         foreach ($addresses as $item) {
           foreach ($item as $address){
             if ( $address[0] == $wallet->wallet_address){
@@ -81,7 +86,9 @@ class UserController extends Controller
         $coin->tx_fee = $gas_fee;
         $wallet->balance = $balance;
         $coin->user_balance = $balance;
-        $coin->address = $address;
+
+
+
         $wallet->save();
       }
 
