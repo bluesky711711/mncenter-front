@@ -117,13 +117,13 @@
       <div class="accent-bg"></div>
       <ul>
         <li><span>Needed For a Seat: </span>{{$coin->seat_price}}</li>
-        <li><span>Total </span>:0.0000
+        <li><span>Total </span>:{{$coin->user_balance}}
           @if (!Auth::guest())
             <a style="cursor:pointer" onclick="withdraw()"><img src="/img/withdraw_icon.png" style="height:20px;float:right;margin-left:20px"/></a>
             <a style="cursor:pointer" onclick="deposit()"><img src="/img/deposit_icon.png" style="height:20px;float:right"/></a>
           @endif
         </li>
-        <li><span>Available: </span>0.0000</li>
+        <li><span>Available: </span>{{$coin->user_balance}}</li>
         <li><span>In Queue: </span>0</li>
         <li><span>Profit: </span>0
           @if (!Auth::guest())
