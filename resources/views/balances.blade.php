@@ -111,9 +111,9 @@
                   </div>
                 </div> </td>
                 <td><a href="masternode-details.html"><img src="/img/{{$coin->coin_name}}.png" alt="icon"></a> {{$coin->coin_name}} ({{$coin->coin_symbol}})</td>
-                <td>    	0.00000000 </td>
+                <td>    	{{$coin->user_balance}} </td>
                 <td>    		0</td>
-                <td>    	     	0</td>
+                <td>    	     	{{$coin->user_balance}}</td>
                 <td>    	        	0.00000000</td>
                 <td>    	            	0.00000000 </td>
                 <td>    	               	0.00000000</td>
