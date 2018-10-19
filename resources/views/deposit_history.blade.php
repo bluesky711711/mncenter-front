@@ -27,6 +27,7 @@
           </tr>
         </thead>
         <tbody>
+          @if (count($deposits) > 0)
           @foreach ($deposits as $deposit)
           <tr>
             <td>	{{$deposit->id}}  </td>
@@ -36,6 +37,7 @@
             <td>  {{$deposit->created_at}} </td>
           </tr>
           @endforeach
+          @endif
           @if (count($deposits) == 0)
           <div class="row" style="text-align:center;padding-top:20px">
             <span style="font-size:25px">No any deposits yet!</span>

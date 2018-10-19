@@ -11,7 +11,7 @@ use App\Setting;
 use App\Reward;
 use App\Wallet;
 use App\User;
-
+use App\Sale;
 use GuzzleHttp\Client;
 use App\Http\Controllers\Rpc\jsonRPCClient;
 use Log;
@@ -91,35 +91,46 @@ class MasternodeController extends Controller
   {
     $coin = Coin::where('id', $id)->first();
     $user = Auth::user();
+    $coin->walletversion = 'unknown';
+    $coin->blocks = 'unknown';
+    $coin->connections = 'unknown';
     if ($coin->status != "Active"){
       $coin->user_balance = 0;
       $coin->address = "unknow";
     } else {
-    $coin->user_balance = 0;
-    $wallet = Wallet::where('coin_id', $coin->id)->where('user_id', $user->id)->first();
-    $rpc_user = $coin->rpc_user;
-    $rpc_password = $coin->rpc_password;
-    $rpc_port= $coin->rpc_port;
-    $rpc_ip= $coin->rpc_ip;
-    $client = new jsonRPCClient('http://'.$rpc_user.':'.$rpc_password.'@'.$rpc_ip.':'.$rpc_port.'/');
-    if ($wallet->wallet_address && $wallet->wallet_address != ''){
-      $address = $wallet->wallet_address;
-    } else {
-      $address = $client->getaccountaddress("$user->id");
-      $wallet->wallet_address = $address;
-    }
+      $rpc_user = $coin->rpc_user;
+      $rpc_password = $coin->rpc_password;
+      $rpc_port= $coin->rpc_port;
+      $rpc_ip= $coin->rpc_ip;
 
-    $balance = $client->getbalance("$user->id");
-    $gas_fee = $client->estimatefee(5);
-    Log::info('$gas_fee');
-    Log::info($gas_fee);
-    $coin->tx_fee = $gas_fee;
-    $wallet->balance = $balance;
-    $coin->user_balance = $balance;
-    $coin->address = $address;
-    $wallet->save();
+      $client = new jsonRPCClient('http://'.$rpc_user.':'.$rpc_password.'@'.$rpc_ip.':'.$rpc_port.'/');
+      $info = $client->getinfo();
+      if ($info){
+        $coin->blocks = $info['blocks'];
+        $coin->connections = $info['connections'];
+        $coin->walletversion = $info['walletversion'];
+      }
+      $coin->user_balance = 0;
+      if ($user){
+        $wallet = Wallet::where('coin_id', $coin->id)->where('user_id', $user->id)->first();
+        $balance = $wallet->balance;
+        $coin->user_balance = $balance;
+        $coin->address = $wallet->wallet_address;
+      } else {
+        $coin->user_balance = NULL;
+      }
     }
     $masternodes = Masternode::where('coin_id', $id)->get();
+    foreach ($masternodes as $masternode){
+      $masternode->total_seats = $coin->masternode_amount / $coin->seat_price;
+      $sales = Sale::where('masternode_id', $masternode->id)->get();
+      $saled = 0;
+      foreach ($sales as $sale) {
+        $saled = $total + $sale->sales_amount;
+      }
+      $masternode->seat_amount = $saled;
+      $masternode->empty_seats = $masternode->total_seats - $masternode->seat_amount;
+    }
     $completed_masternodes = Masternode::where('coin_id', $id)->where('status', 'Completed')->get();
     $preparing_masternode = Masternode::where('coin_id', $id)->where('status', 'Preparing')->first();
     return view('masternodes', [
@@ -142,11 +153,5 @@ class MasternodeController extends Controller
       'rewards' => $rewards,
       'coin' => $coin,
     ]);
-  }
-
-  public function addseats(Request $request){
-    $coin_id = $request->input('coind_id');
-    $masternode_id = $request->input('masternode_id');
-    $user_id = Auth::user()->id;
   }
 }

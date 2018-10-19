@@ -12,6 +12,8 @@ use App\Transaction;
 use App\Reward;
 use App\Wallet;
 use App\User;
+use App\Sale;
+use App\Paymentsetting;
 use App\Http\Controllers\Rpc\jsonRPCClient;
 use Log;
 class UserController extends Controller
@@ -53,43 +55,14 @@ class UserController extends Controller
         if ($masternode) $coin->queue_masternode = $masternode;
 
         $wallet = Wallet::where('coin_id', $coin->id)->where('user_id', $user->id)->first();
-        $rpc_user = $coin->rpc_user;
-        $rpc_password = $coin->rpc_password;
-        $rpc_port= $coin->rpc_port;
-        $rpc_ip= $coin->rpc_ip;
 
-        $client = new jsonRPCClient('http://'.$rpc_user.':'.$rpc_password.'@'.$rpc_ip.':'.$rpc_port.'/');
-
-        if ($wallet->wallet_address && $wallet->wallet_address != ''){
-          $address = $wallet->wallet_address;
-        } else {
-          $address = $client->getaccountaddress("$user->id");
-          Log::info($address);
-          $wallet->wallet_address = $address;
-        }
-        
-        if ($address)
-          $coin->address = $address;
-
-        $addresses = $client->listaddressgroupings();
-
-        foreach ($addresses as $item) {
-          foreach ($item as $address){
-            if ( $address[0] == $wallet->wallet_address){
-              $balance = $address[1];
-            }
-          }
-        }
-
-        $gas_fee = $client->estimatefee(5);
-
-        $coin->tx_fee = $gas_fee;
-        $wallet->balance = $balance;
-        $coin->user_balance = $balance;
+        $coin->address = $wallet->wallet_address;
 
 
+        $coin->tx_fee = 0;
 
-        $wallet->save();
+        $coin->user_balance = $wallet->balance;
+
       }
 
       return view('balances', [
@@ -112,8 +85,27 @@ class UserController extends Controller
       $rpc_user = $coin->rpc_user;
       $rpc_password = $coin->rpc_password;
       $rpc_port= $coin->rpc_port;
-      $client = new jsonRPCClient('http://'.$rpc_user.':'.$rpc_password.'@88.208.229.104:'.$rpc_port.'/');
-      $res = $client->sendfrom("$user->id", $to_address, $amount);
+      $rpc_ip= $coin->rpc_ip;
+      $client = new jsonRPCClient('http://'.$rpc_user.':'.$rpc_password.'@'.$rpc_ip.':'.$rpc_port.'/');
+      $res = $client->sendtoaddress($to_address, $amount);
+
+      if ($res){
+        $transaction = Transaction::create([
+          'transaction_hash' => $res,
+          'coin_id' => $coin->id,
+          'type' => 'WITHDRAW',
+          'user_id'=> $user->id,
+          'amount' => $amount,
+          'status' => 'Pending',
+          'to_address' => $to_address,
+          'confirms' => 0
+        ]);
+
+        Log::info($res);
+      } else {
+          return back()->with('failed','transaction failed!');
+      }
+      return back()->with('success','successfully submitted the sending request!');
     }
 
     public function withdrawal_history()
@@ -130,6 +122,7 @@ class UserController extends Controller
     {
         $user_id = Auth::user()->id;
         $deposits = Transaction::where('type', 'DEPOSIT')->where('user_id', $user_id)->get();
+        Log::info($user_id);
         return view('deposit_history', [
           'page' => 'deposit_history',
           'deposits' => $deposits
@@ -172,6 +165,12 @@ class UserController extends Controller
         ]);
     }
 
+    public function post_deposit(Request $request){
+      $coin_id = $request->input('coin_id');
+      $user = Auth::user();
+
+    }
+
     public function deposit(Request $request){
       $coin_id = $request->input('coin_id');
     }
@@ -180,4 +179,46 @@ class UserController extends Controller
       $coin_id = $request->input('coin_id');
     }
 
+    public function buyseats(Request $request){
+      $user = Auth::user();
+      $coin_id = $request->input('sale_coin_id');
+      $masternode_id = $request->input('masternodeid');
+      $seat_amount = $request->input('seat_amount');
+      $coin = Coin::where('id', $coin_id)->first();
+      $amount = $seat_amount * $coin->seat_price;
+      $rpc_user = $coin->rpc_user;
+      $rpc_password = $coin->rpc_password;
+      $rpc_port= $coin->rpc_port;
+      $rpc_ip= $coin->rpc_ip;
+      $client = new jsonRPCClient('http://'.$rpc_user.':'.$rpc_password.'@'.$rpc_ip.':'.$rpc_port.'/');
+
+      $codeList = Paymentsetting::all();
+      $payment_settings = [];
+      for($i = 0; $i < count($codeList); $i++) {
+        $payment_settings[$codeList[$i]["name"]] = $codeList[$i]["value"];
+      }
+
+      if (isset($payment_settings[$coin->coin_name])){
+          Log::info($payment_settings[$coin->coin_name]);
+          Log::info($amount);
+          $res = $client->sendtoaddress($payment_settings[$coin->coin_name], $amount);
+          if (!$res){
+              return back()->with('failed','failed for generating transaction!');
+          } else {
+            Sale::create([
+              'transaction_id' => $res,
+              'coin_id' => $coin_id,
+              'masternode_id' => $masternode_id,
+              'user_id' => $user->id,
+              'sales_amount' => $seat_amount,
+              'total_price' => $amount,
+              'status' => 'Pending',
+              'confirms' => '0'
+            ]);
+          }
+      } else {
+        return back()->with('failed','No any target address!');
+      }
+      return back()->with('success','successfully submitted the sales request! it may takes some times for confirming it.');
+    }
 }

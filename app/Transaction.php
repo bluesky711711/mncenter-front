@@ -15,7 +15,7 @@ use App\Word;
 
 class Transaction extends Model
 {
-	protected $fillable = ['type', 'user_id', 'coin_id', 'from_address', 'to_address', 'amount', 'status'];
+	protected $fillable = ['type', 'transaction_hash', 'user_id', 'coin_id', 'from_address', 'to_address', 'amount', 'status', 'confirms', 'transaction_time'];
 
 	public function coin()
 	{

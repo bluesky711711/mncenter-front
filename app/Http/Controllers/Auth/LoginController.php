@@ -69,6 +69,15 @@ class LoginController extends Controller
               $wallet = Wallet::where('coin_id', $coin->id)->where('user_id', $user_id)->first();
               if ($wallet && $wallet->wallet_address != ''){
                 $coin->user_balance = $wallet->balance;
+                Log::info('wallet exist');
+              } else if ($wallet){
+                $rpc_user = $coin->rpc_user;
+                $rpc_password = $coin->rpc_password;
+                $rpc_port= $coin->rpc_port;
+                $rpc_ip= $coin->rpc_ip;
+                $client = new jsonRPCClient('http://'.$rpc_user.':'.$rpc_password.'@'.$rpc_ip.':'.$rpc_port.'/');
+                $address = $client->getaccountaddress("$user_id");
+                $wallet->wallet_address = $address;
               } else {
                 $rpc_user = $coin->rpc_user;
                 $rpc_password = $coin->rpc_password;
@@ -76,12 +85,11 @@ class LoginController extends Controller
                 $rpc_ip= $coin->rpc_ip;
                 $client = new jsonRPCClient('http://'.$rpc_user.':'.$rpc_password.'@'.$rpc_ip.':'.$rpc_port.'/');
                 $address = $client->getaccountaddress("$user_id");
-                $balance = $client->getbalance("$user_id");
                 $wallet = Wallet::create([
                   'coin_id' => $coin->id,
                   'user_id' => $user_id,
                   'wallet_address' => $address,
-                  'balance' => $balance
+                  'balance' => 0
                 ]);
               }
             }

@@ -43,7 +43,7 @@
     <div class="popup-text">
 
       <div class="withdraw-box">
-        <label>Blance</label>
+        <label>Balance</label>
         <input type="text" class="form-control" placeholder="0">
       </div>
       <div class="withdraw-box">
@@ -96,10 +96,10 @@
               <td width="9%">	Completed MN</td>
               <td width="15%">Coins needed for a Seat</td>
               <td width="11%">Required for MN</td>
-              <td width="21%">Coins in Queue</td>
-              <td width="17%">Required for next MN</td>
+              <td width="15%">Coins in Queue</td>
+              <td width="15%">Required for next MN</td>
               <td width="10%">Coin price</td>
-              <td width="10%">MN price</td>
+              <td width="19%">MN price</td>
           </tr>
           </thead>
           <tbody id="coin-list">
@@ -111,8 +111,8 @@
                     <td style="text-align:center">{{$coin->masternode_amount}}</td>
                     <td style="text-align:center">@if ($coin->queue_masternode) {{$coin->queue_masternode->seat_amount * $coin->seat_price}} ({{$coin->queue_masternode->seat_amount * 100 / $coin->queue_masternode->total_seats}}%) @endif</td>
                     <td style="text-align:center">@if ($coin->queue_masternode) {{$coin->queue_masternode->empty_seats * $coin->seat_price}} ({{$coin->queue_masternode->empty_seats * 100 / $coin->queue_masternode->total_seats}}%) @endif</td>
-                    <td style="text-align:center">{{$coin->coin_price}} $</td>
-                    <td style="text-align:center">{{$coin->coin_price * $coin->masternode_amount}} $</td>
+                    <td style="text-align:center">{{number_format($coin->coin_price, 6)}} $</td>
+                    <td style="text-align:center">{{number_format($coin->coin_price * $coin->masternode_amount, 2)}} $</td>
                 </tr>
             @endforeach
           </tbody>

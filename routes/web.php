@@ -30,4 +30,6 @@ Route::get('/deposit_history', 'UserController@deposit_history')->name('deposit_
 Route::get('/withdrawal_history', 'UserController@withdrawal_history')->name('withdrawal_history');
 Route::get('/reward_history', 'UserController@reward_history')->name('reward_history');
 Route::get('/user_settings', 'UserController@user_settings')->name('user_settings');
+
 Route::post('/withdraw', 'UserController@withdraw_post')->name('withdraw_post');
+Route::post('/buyseats', 'UserController@buyseats')->name('buyseats');

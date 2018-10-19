@@ -98,7 +98,11 @@
                   <li><a class="page-scroll" href="/videos">Videos</a></li>
                   @endif
                   <li class="dropdown">
+                    @if (!Auth::guest())
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i style="margin-right:6px;" class="far fa-user"></i>{{Auth::user()->name}}<b class="caret"></b></a>
+                    @else
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i style="margin-right:6px;" class="far fa-user"></i>Account <b class="caret"></b></a>
+                    @endif
                     <ul class="dropdown-menu">
                       @if (!Auth::guest())
                       <li><a href="/deposit_history">Deposit History</a></li>
@@ -128,9 +132,6 @@
 
     @yield('content')
     <!--Start Part-5-->
-
-
-
     <!--Start Footer-->
     <footer>
       <div class="container">

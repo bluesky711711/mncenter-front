@@ -11,9 +11,7 @@
     <a class="popup-close" id="deposit_close" href="javascript:void(0)"><i class="fas fa-times"></i></a>
   </div>
   <div class="popup-text">
-    <p>
-      Please use the address below to deposit new funds</p>
-
+    <p>Please use the address below to deposit new funds</p>
       <div class="dep-box">
         <label>Deposit address</label>
         <div class="clearfix">
@@ -72,6 +70,46 @@
     </form>
   </div>
 
+  <div class="deposite-box" id="salebox" style="display:none;">
+    <form id="sale_form" method="POST"  action="/buyseats">
+      <input name="sale_coin_id" id="sale_coin_id" type="hidden" value=""/>
+      <input name="seat_amount" id="seat_amount" type="hidden" value=""/>
+      <input name="masternodeid" id="masternodeid" type="hidden" value=""/>
+    </form>
+    <div class="deposite-head">
+      <h3>Buy Seats</h3>
+      <div class="accent-bg"></div>
+      <a class="popup-close" id="withdraw_close" href="javascript:void(0)"><i class="fas fa-times"></i></a>
+    </div>
+    <div class="popup-text">
+      <div class="withdraw-box">
+        <label>Balance</label>
+        <input type="text" name="sale_balance" id="sale_balance" class="form-control withdraw-balance" placeholder="0" value="" disabled/>
+      </div>
+      <div class="withdraw-box">
+        <label>Seats Count to Buy <span style="padding-left:20px;font-size:12px">(Need <span id="empty_seats"></span> seats to complete)</span></label>
+        <input type="text" name="sale_count_seats" id="sale_count_seats" class="form-control" placeholder="0" oninput="changeSalescount(this.value)"/>
+      </div>
+      <div class="withdraw-box">
+        <label>Total Amount</label>
+        <input type="text" name="sale_total_amount" id="sale_total_amount" class="form-control withdraw-amount" disabled/>
+      </div>
+      <!-- <div class="withdraw-box">
+        <label>Tx fee </label>
+        <input type="text" class="form-control" id="sale_tx_fee" placeholder="-1" disabled />
+        <p style="font-size:10px">A negative value means that you not enough transactions and blocks have been observered to make an estimate.</p>
+      </div> -->
+      <br><br>
+      <p></p>
+    </div>
+
+    <div class="dep-btn">
+      <a class="his-btn" href="javascript:void(0)" onclick="buy()">Buy</a>
+      <a  class="clear" id="sale_close" href="javascript:void(0)">Cancel</a>
+    </div>
+
+  </div>
+
 <div class="inner-banner">
   <div class="container">
     <h3>Masternodes</h3>
@@ -95,7 +133,16 @@
   New masternodes will be handled between 19-22 hrs UTC.
 
 </div> -->
-
+@if ($message = Session::get('success'))
+<div class="alert alert-success">
+  <p>The request successfully sent! it may take some times for confirmations.</p>
+</div>
+@endif
+@if ($message = Session::get('failed'))
+<div class="alert alert-danger">
+  <p>The transaction failed!  Please try it after 30 mins!</p>
+</div>
+@endif
 <div class="mas-table">
   <div class="col-md-4">
     <div class="set-box">
@@ -141,9 +188,9 @@
       <div class="accent-bg"></div>
       <ul>
         <li><span>Status:</span>{{$coin->status}}</li>
-        <li><span>Last Block:</span>347221</li>
-        <li><span>Block Time:</span>14.07.2018 09:29</li>
-        <li><span>Wallet Read Time:</span>14.07.2018 09:34 </li>
+        <li><span>Last Block:</span>{{$coin->blocks}}</li>
+        <li><span>Connections:</span>{{$coin->connections}}</li>
+        <li><span>Wallet version:</span>{{$coin->walletversion}} </li>
       </ul>
       <div class="clearfix"></div>
     </div>
@@ -178,7 +225,7 @@
       <td style="text-align:center">@if ($masternode->status=="Completed") {{$masternode->rewardtotal}} @else 0 @endif</td>
       <td style="text-align:center">
       @if ($masternode->status != "Completed")
-        <button class="btn btn-primary" type="button" id="add_seats" onclick="addseats({{$masternode->id}})">
+        <button class="btn btn-primary" type="button" id="add_seats" onclick="addseats({{$masternode->id}}, {{$masternode->empty_seats}}, {{$masternode->seat_amount}})">
           Add seats
         </button>
       @endif
@@ -295,12 +342,49 @@ $("#withdraw_close").click(function(){
   $("#withdrawbox").fadeOut('fast');
 });
 
-function addseats(id){
+$('.popup-close').click(function(){
+  $(".popup-overlay").css("display", "none");
+  $("#salebox").fadeOut('fast');
+});
+
+$('#sale_close').click(function(){
+  $(".popup-overlay").css("display", "none");
+  $("#salebox").fadeOut('fast');
+});
+
+function addseats(id, empty_seats, seat_amount){
   @if (Auth::guest())
     location.href = '/login';
   @else
-    alert('Your balance is not enough for a seat!');
+  masternodeid = id;
+  coin_id = "{{$coin->id}}";
+  balance = "{{$coin->user_balance}}";
+  //fee = "{{$coin->tx_fee}}";
+  $('#sale_balance').val(balance);
+  //$('#sale_tx_fee').val(fee);
+  $('#sale_coin_id').val(coin_id);
+  $('#masternodeid').val(id);
+  $('#empty_seats').html(empty_seats);
+  $(".popup-overlay").css("display", "block");
+  $("#salebox").fadeIn('slow');
   @endif
+}
+
+
+function changeSalescount(val){
+  seat_price = parseFloat("{{$coin->seat_price}}");
+  $('#sale_total_amount').val(val*seat_price);
+}
+
+function buy(){
+  sale_balance = $('#sale_balance').val();
+  sale_total_amount = $('#sale_total_amount').val();
+  if (sale_balance <= sale_total_amount){
+    alert('You have not enough balance for this sale!')
+    return;
+  }
+  $('#seat_amount').val($('#sale_count_seats').val());
+  $('#sale_form').submit();
 }
 </script>
 

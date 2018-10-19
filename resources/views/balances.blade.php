@@ -9,9 +9,7 @@
       <a class="popup-close" id="deposit_close" href="javascript:void(0)"><i class="fas fa-times"></i></a>
     </div>
     <div class="popup-text">
-      <p>
-        Please use the address below to deposit new funds</p>
-
+      <p>Please use the address below to deposit new funds</p>
         <div class="dep-box">
           <label>Deposit address</label>
           <div class="clearfix">
@@ -49,7 +47,7 @@
         </div>
         <div class="withdraw-box">
           <label>Withdraw Address</label>
-          <input type="text" name="to_address" id="to_address" class="form-control" placeholder="0" />
+          <input type="text" name="to_address" id="to_address" class="form-control" placeholder="" />
         </div>
         <div class="withdraw-box">
           <label>Withdraw Amount</label>
@@ -58,7 +56,7 @@
         <div class="withdraw-box">
           <label>Tx fee </label>
           <input type="text" class="form-control" id="tx_fee" placeholder="-1" disabled />
-          <p style="font-size:10px">A negative value means that you not enough transactions and blocks have been observered to make an estimate.</p>
+          <p style="font-size:10px">A negative value means that the platform will handle it automatically as optimized amount.</p>
         </div>
         <p>Please verify your withdrawl address</p>
       </div>
@@ -80,7 +78,16 @@
 
     <section id="part_1" style="min-height:590px">
       <div class="container">
-
+        @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+          <p>The request successfully sent! it may take some times for confirmations.</p>
+        </div>
+        @endif
+        @if ($message = Session::get('failed'))
+        <div class="alert alert-danger">
+          <p>The transaction failed!  Please try it after 30 mins!</p>
+        </div>
+        @endif
         <div class="mas-table">
           <table width="100%" border="0" class="table table-striped">
             <thead>
@@ -167,10 +174,12 @@
           height: 128,
           text: address
         };
+        $('.qrcode').html('');
         $('.qrcode').qrcode(option);
         $('.deposit-address').val(address);
         $(".popup-overlay").css("display", "block");
         $("#depositbox").fadeIn('slow');
+
       });
 
       $("#deposit_close").click(function(){
@@ -215,9 +224,11 @@
         alert('Please input the amount correctly!');
         return;
       }
+      console.log('amount', amount);
       balance = $('#balance').val();
-      tx_fee = $('#tx_fee').val();
-      if (amount + tx_fee <= balance){
+      console.log('balance', balance);
+      //tx_fee = $('#tx_fee').val();
+      if (parseFloat(amount) < parseFloat(balance)){
         $('#withdraw_form').submit();
       } else {
         alert('Your balance is not enough for this transaction!');

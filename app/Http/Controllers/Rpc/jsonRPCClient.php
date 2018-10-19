@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers\Rpc;
+use Log;
 class jsonRPCClient {
     /*
      * Debug state
@@ -28,6 +29,12 @@ class jsonRPCClient {
      *  @param String $url
      *  @param Boolean $debug
      */
+
+    public function customError($errorno, $errstr){
+      Log::info($errstr);
+      return NULL;
+    }
+
     public function __construct($uri, $debug = false) {
         $this->uri = $uri;
         empty($proxy) ? $this->proxy = '' : $this->proxy = $proxy;
@@ -73,6 +80,9 @@ class jsonRPCClient {
                                        'content' => $request
                                        ));
          $context = stream_context_create($opts);
+
+         set_error_handler(array($this, 'customError'), E_ALL);
+
          if($fp = fopen($this->uri, 'r', false, $context)) {
             $response = '';
             while($row=fgets($fp)) {

@@ -15,7 +15,7 @@ use App\Word;
 
 class Sale extends Model
 {
-	protected $fillable = ['user_id', 'masternode_id', 'saled_seats_count', 'total_price', 'status'];
+	protected $fillable = ['user_id', 'transaction_id', 'coin_id', 'user_id', 'sales_amount', 'total_price',  'masternode_id',  'status'];
 
 	public function user()
 	{
