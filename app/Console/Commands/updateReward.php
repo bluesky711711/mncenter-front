@@ -8,7 +8,7 @@ use App\Coin;
 use App\Masternode;
 use App\Paymentsetting;
 use App\Server;
-class updatePrice extends Command
+class updateReward extends Command
 {
     /**
      * The name and signature of the console command.
@@ -79,9 +79,9 @@ class updatePrice extends Command
     {
       $masternodes = Masternode::where('status', 'Completed')->get();
       foreach ($masternodes as $masternode){
-        $coin = Coin::where('id', $masternode->coin_id)->get()
+        $coin = Coin::where('id', $masternode->coin_id)->get();
         $server = Server::where('id', $masternode->server_id)->first();
-        
+
       }
     }
 }
