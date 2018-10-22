@@ -108,7 +108,7 @@ class updateSale extends Command
           ];
 
           $data_string = json_encode($data);
-          $res = $this->CallAPI('POST', 'http://localhost:3000/api/recordsales', $data_string);
+          $res = $this->CallAPI('POST', 'http://95.179.179.106:3000/api/recordsales', $data_string);
           Log::info('called api');
           if ($res->status == "failed"){
             $code = Generalsetting::firstOrCreate(["name" => "etherem_balance_status"]);
