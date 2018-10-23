@@ -27,14 +27,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('updatePrice')
-                 ->everyFiveMinutes();
-        $schedule->command('updateWallet')
-                 ->everyFiveMinutes();
-        $schedule->command('updateTransaction')
-                 ->everyFiveMinutes();
-        $schedule->command('updateSale')
-                 ->everyFiveMinutes();
+        $schedule->command('updatePrice')->everyMinute();
+        $schedule->command('updateWallet')->everyMinute();
+        $schedule->command('updateTransaction')->everyMinute();
+        $schedule->command('updateSale')->everyMinute();
     }
 
     /**
