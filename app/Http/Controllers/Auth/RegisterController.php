@@ -73,6 +73,25 @@ class RegisterController extends Controller
         ]);
     }
 
+    public function resendToken(Request $request){
+      $email = $request->input('resend_email');
+      Log::info($email);
+      $user = User::where('email', $email)->first();
+      if ($user){
+        $user = $user->toArray();
+        Log::info($user);
+        $user['link'] = str_random(30);
+        DB::table('user_activations')->where('id_user', $user['id'])->update(['token'=>$user['link']]);
+
+        Mail::send('emails.activation', $user, function($message) use ($user) {
+            $message->to($user['email']);
+            $message->subject('Site - Activation Code');
+        });
+        return redirect()->to('login')->with('warning',"Resent successfully!");
+      }
+      return redirect()->to('login')->with('warning',"Resending failed!");
+    }
+
     public function register(Request $request)
     {
         $input = $request->all();
@@ -86,10 +105,11 @@ class RegisterController extends Controller
 
             DB::table('user_activations')->insert(['id_user'=>$user['id'],'token'=>$user['link']]);
 
-            // Mail::send('emails.activation', $user, function($message) use ($user) {
-            //     $message->to($user['email']);
-            //     $message->subject('Site - Activation Code');
-            // });
+            Mail::send('emails.activation', $user, function($message) use ($user) {
+                $message->to($user['email']);
+                $message->from('admin.mncenter.online');
+                $message->subject('Site - Activation Code');
+            });
 
             if (auth()->attempt(array('email' => $request->input('email'), 'password' => $request->input('password'))))
             {

@@ -29,7 +29,7 @@
           @endif
           @if ($message = Session::get('warning'))
               <div class="alert alert-warning">
-                  <p>{{ $message }}</p>
+                  <p>{{ $message }} <a onclick="Resend()" style="cursor:pointer">Resend</a></p>
               </div>
           @endif
           @if ($message = Session::get('error'))
@@ -67,7 +67,17 @@
       </div>
     </div>
   </div>
+  <form id="form_resend" method="POST" action="/resendToken">
+    <input type="hidden" id="resend_email" name="resend_email" value=""/>
+  </form>
   <div class="clearfix"></div>
 </section>
-
+<script>
+function Resend(){
+  @if ($email = Session::get('email'))
+    $('#resend_email').val("{{$email}}");
+    $('#form_resend').submit();
+  @endif
+}
+</script>
 @endsection

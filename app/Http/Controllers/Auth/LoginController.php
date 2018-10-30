@@ -54,7 +54,7 @@ class LoginController extends Controller
         {
             if(auth()->user()->is_activated != 1){
                 Auth::logout();
-                return back()->with('warning',"First please active your account.");
+                return back()->with(['warning' => "First please active your account.", 'email' => $request->input('email')]);
             }
 
             $user_id = auth()->user()->id;
