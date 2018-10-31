@@ -16,7 +16,7 @@
 <section id="part_1" style="min-height:600px">
   <div class="container">
 
-    <div class="col-md-6">
+    <!-- <div class="col-md-6">
       <div class="set-box">
         <form action="" method="get">
           <label>Nickname</label>
@@ -29,7 +29,7 @@
         </form>
         <div class="clearfix"></div>
       </div>
-    </div>
+    </div> -->
 
     <div class="col-md-6">
       <div class="set-box">
