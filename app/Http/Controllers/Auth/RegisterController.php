@@ -107,7 +107,6 @@ class RegisterController extends Controller
 
             Mail::send('emails.activation', $user, function($message) use ($user) {
                 $message->to($user['email']);
-                $message->from('admin.mncenter.online');
                 $message->subject('Site - Activation Code');
             });
 
