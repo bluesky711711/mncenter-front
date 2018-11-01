@@ -55,7 +55,7 @@ class updateTransaction extends Command
         $rpc_port= $coin->rpc_port;
         $rpc_ip= $coin->rpc_ip;
         $client = new jsonRPCClient('http://'.$rpc_user.':'.$rpc_password.'@'.$rpc_ip.':'.$rpc_port.'/');
-        $trans = $client->listtransactions("$user_id", 100);
+        $trans = $client->listtransactions("$user_id", 1000);
         if (!$trans) continue;
         foreach ($trans as $tran){
             if ($tran['category'] == 'send') continue;
@@ -65,7 +65,6 @@ class updateTransaction extends Command
               if ($tran["confirmations"] > 5) $item->status="Completed";
               $item->save();
             } else {
-              Log::info($tran);
               $status = 'Pending';
               if ($tran["confirmations"] > 5) $status="Completed";
               Transaction::create([
