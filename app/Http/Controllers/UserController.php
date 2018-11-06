@@ -87,8 +87,8 @@ class UserController extends Controller
       $rpc_port= $coin->rpc_port;
       $rpc_ip= $coin->rpc_ip;
       $client = new jsonRPCClient('http://'.$rpc_user.':'.$rpc_password.'@'.$rpc_ip.':'.$rpc_port.'/');
-      $res = $client->sendtoaddress($to_address, $amount);
 
+      $res = $client->sendtoaddress($to_address, floatval($amount));
       if ($res){
         $transaction = Transaction::create([
           'transaction_hash' => $res,
@@ -100,8 +100,7 @@ class UserController extends Controller
           'to_address' => $to_address,
           'confirms' => 0
         ]);
-
-        Log::info($res);
+        //Log::info($res);
       } else {
           return back()->with('failed','transaction failed!');
       }

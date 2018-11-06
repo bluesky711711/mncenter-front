@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
         Commands\updateTransaction::class,
         Commands\updateSale::class,
         Commands\updateReward::class,
+        Commands\testCommand::class,
     ];
 
     /**

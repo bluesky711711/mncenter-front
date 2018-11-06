@@ -97,8 +97,8 @@ class updateTransaction extends Command
         $client = new jsonRPCClient('http://'.$rpc_user.':'.$rpc_password.'@'.$rpc_ip.':'.$rpc_port.'/');
         $tran = $client->gettransaction($withdraw->transaction_hash);
         $withdraw->confirms = $tran['confirmations'];
-        Log::info($tran);
-        Log::info($tran['confirmations']);
+        // Log::info($tran);
+        // Log::info($tran['confirmations']);
         if ($tran['confirmations'] > 5){
           $withdraw->status = "Completed";
           $wallet = Wallet::where('coin_id', $withdraw->coin_id)->where('user_id', $user_id)->first();
