@@ -60,17 +60,17 @@ class updateWallet extends Command
 
         foreach ($addresses as $item) {
           foreach ($item as $address){
-            if ( $address[0] == $wallet->wallet_address){
+            if ( strtolower($address[0]) == strtolower($wallet->wallet_address)){
               $balance = $address[1];
             }
           }
         }
 
-        if ($balance > 0){
+        if (floatval($balance) > 0){
           $user = User::where('id', $wallet->user_id)->first();
           $address = $client->getnewaddress("$user->id");
           $wallet->wallet_address = $address;
-          $wallet->balance =+ $balance;
+          $wallet->balance = floatval($wallet->balance) + floatval($balance);
           $wallet->save();
         }
       }

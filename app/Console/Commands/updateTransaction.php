@@ -62,7 +62,11 @@ class updateTransaction extends Command
             $item = Transaction::where('transaction_hash', $tran['txid'])->where('user_id', $user_id)->where('type', 'DEPOSIT')->first();
             if (isset($item->id)){
               $item->confirms = $tran['confirmations'];
-              if ($tran["confirmations"] > 5) $item->status="Completed";
+              if ($item->status != "Completed" && $tran["confirmations"] > 5) {
+                  $item->status="Completed";
+                  // $wallet->balance = floatval($wallet->balance) + floatval($tran['amount']);
+                  // $wallet->save();
+              }
               $item->save();
             } else {
               $status = 'Pending';
@@ -102,7 +106,7 @@ class updateTransaction extends Command
         if ($tran['confirmations'] > 5){
           $withdraw->status = "Completed";
           $wallet = Wallet::where('coin_id', $withdraw->coin_id)->where('user_id', $user_id)->first();
-          $wallet->balance = $wallet->balance + $tran['amount'];
+          $wallet->balance = floatval($wallet->balance) + floatval($tran['amount']);
           $wallet->save();
         }
         $withdraw->save();
