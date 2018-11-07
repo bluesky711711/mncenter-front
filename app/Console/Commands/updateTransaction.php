@@ -64,8 +64,8 @@ class updateTransaction extends Command
               $item->confirms = $tran['confirmations'];
               if ($item->status != "Completed" && $tran["confirmations"] > 5) {
                   $item->status="Completed";
-                  // $wallet->balance = floatval($wallet->balance) + floatval($tran['amount']);
-                  // $wallet->save();
+                  $wallet->balance = floatval($wallet->balance) + floatval($tran['amount']);
+                  $wallet->save();
               }
               $item->save();
             } else {
