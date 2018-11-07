@@ -200,7 +200,7 @@ class UserController extends Controller
       if (isset($payment_settings[$coin->coin_name])){
           Log::info($payment_settings[$coin->coin_name]);
           Log::info($amount);
-          $res = $client->sendtoaddress($payment_settings[$coin->coin_name], flotval($amount));
+          $res = $client->sendtoaddress($payment_settings[$coin->coin_name], floatval($amount));
           if (!$res){
               return back()->with('failed','failed for generating transaction!');
           } else {
