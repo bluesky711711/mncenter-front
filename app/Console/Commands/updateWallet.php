@@ -70,7 +70,7 @@ class updateWallet extends Command
           $user = User::where('id', $wallet->user_id)->first();
           $address = $client->getnewaddress("$user->id");
           $wallet->wallet_address = $address;
-          $wallet->balance = floatval($wallet->balance) + floatval($balance);
+          //$wallet->balance = floatval($wallet->balance) + floatval($balance);
           $wallet->save();
         }
       }
