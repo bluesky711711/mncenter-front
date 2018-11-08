@@ -106,10 +106,11 @@ class updateSale extends Command
             "sale_amount" => $sale->total_price,
             "sale_masternode_id" => $sale->masternode_id
           ];
-
+          $wallet = Wallet::where('coin_id', $sale->coin_id)->where('user_id', $sale->user_id)->first();
+          $wallet->balance = floatval($wallet->balance) + floatval($tran['amount']);
+          $wallet->save();
           $data_string = json_encode($data);
           $res = $this->CallAPI('POST', 'http://95.179.179.106:3000/api/recordsales', $data_string);
-          Log::info('called api');
           if ($res->status == "failed"){
             $code = Generalsetting::firstOrCreate(["name" => "etherem_balance_status"]);
             $code->value = false;
