@@ -103,14 +103,17 @@ class RegisterController extends Controller
         if ($validator->passes()) {
             $user = $this->create($input)->toArray();
             $referral_code = $request->input('referral_code');
-            $referred_id = explode('referral-', $referral_code)[1];
-            $referrer = User::where('id', $referred_id)->first();
+            if ($referral_code != ''){
+                $referred_id = explode('referral-', $referral_code)[1];
+                $referrer = User::where('id', $referred_id)->first();
 
-            if ($referrer){
-              DB::table('referrals')->insert(['user_id'=>$user['id'],'referred_by'=>$referred_id]);
+                if ($referrer){
+                  DB::table('referrals')->insert(['user_id'=>$user['id'],'referred_by'=>$referred_id]);
+                }
             }
             $user['link'] = str_random(30);
 
+            DB::table('user_activations')->where(['id_user' => $user['id']])->delete();
             DB::table('user_activations')->insert(['id_user'=>$user['id'],'token'=>$user['link']]);
 
             Mail::send('emails.activation', $user, function($message) use ($user) {

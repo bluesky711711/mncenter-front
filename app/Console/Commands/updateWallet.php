@@ -55,22 +55,21 @@ class updateWallet extends Command
         $rpc_ip= $coin->rpc_ip;
         $client = new jsonRPCClient('http://'.$rpc_user.':'.$rpc_password.'@'.$rpc_ip.':'.$rpc_port.'/');
         $address = $wallet->wallet_address;
+        if ($wallet->wallet_address != ''){
+          $addresses = $client->listaddressgroupings();
 
-        $addresses = $client->listaddressgroupings();
-
-        foreach ($addresses as $item) {
-          foreach ($item as $address){
-            if ( strtolower($address[0]) == strtolower($wallet->wallet_address)){
-              $balance = $address[1];
+          foreach ($addresses as $item) {
+            foreach ($item as $address){
+              if ( strtolower($address[0]) == strtolower($wallet->wallet_address)){
+                $balance = $address[1];
+              }
             }
           }
         }
-
-        if (floatval($balance) > 0){
+        if (floatval($balance) > 0 || $wallet->wallet_address == '' || $wallet->wallet_address == NULL){
           $user = User::where('id', $wallet->user_id)->first();
           $address = $client->getnewaddress("$user->id");
           $wallet->wallet_address = $address;
-          //$wallet->balance = floatval($wallet->balance) + floatval($balance);
           $wallet->save();
         }
       }

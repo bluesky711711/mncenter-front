@@ -66,8 +66,8 @@
         <div class="head-top">
           <div class="container">
             <ul class="header-num">
-              <li><i class="fas fa-phone"></i> +91 123 456 7890</li>
-              <li><i class="far fa-envelope"></i>  info@support.com</li>
+              <!-- <li><i class="fas fa-phone"></i> +91 123 456 7890</li> -->
+              <li><i class="far fa-envelope"></i>  info@Mncenter.co</li>
             </ul>
           </div>
         </div>

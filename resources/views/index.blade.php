@@ -155,13 +155,11 @@
 
                 Studies have shown that many people today are using same or slightly modified passwords for many different sites. For us, security is a top priority. That is why we do not store the password of your account. Actually, your password is not known to us and your
                 account is safe. </p>
+                <!-- We prefer to use usernames rather than email addresses, as they are getting more and more important today. However, to increase security, -->
+                <p> We use a username and password for log in. In this way, you can make totally unique login credentials only for our website. </p>
 
-                <p>We prefer to use usernames rather than email addresses, as they are getting more and more important today. However, to increase security, we use a username and password for log in. In this way, you can make totally unique login credentials only for our website. </p>
-
-                <p>Login to the site can be done only from a verified IP address. Every time an attempt is made from a new IP address, it has to be
-                  approved by a link sent to the email address.</p>
-
-                  <p>By default, two-factor authentication is enabled. </p>
+                <p>Register to the site can be done only from a verified Email address. </p>
+                  <!-- <p>By default, two-factor authentication is enabled. </p> -->
                   <div class="clearfix"></div>
                 </li>
 
@@ -169,15 +167,14 @@
                   <div class="tab-image">
                     <img src="img/deposite.png" alt="deposits">
                   </div>
-                  <p>Studies have shown that many people today are using same or slightly modified passwords for many different sites. For us, security is a top priority. That is why we do not store the password of your account. Actually, your password is not known to us and your
-                    account is safe. </p>
+                    <p>Studies have shown that many people today are using same or slightly modified passwords for many different sites. For us, security is a top priority. That is why we do not store the password of your account. Actually, your password is not known to us and your
+                      account is safe. </p>
+                                  <!-- We prefer to use usernames rather than email addresses, as they are getting more and more important today. However, to increase security, -->
+                    <p> We use a username and password for log in. In this way, you can make totally unique login credentials only for our website. </p>
 
-                    <p>We prefer to use usernames rather than email addresses, as they are getting more and more important today. However, to increase security, we use a username and password for log in. In this way, you can make totally unique login credentials only for our website. </p>
+                    <p>Register to the site can be done only from a verified Email address. </p>
 
-                    <p>Login to the site can be done only from a verified IP address. Every time an attempt is made from a new IP address, it has to be
-                      approved by a link sent to the email address. </p>
-
-                      <p>By default, two-factor authentication is enabled.</p>
+                      <!-- <p>By default, two-factor authentication is enabled.</p> -->
                       <div class="clearfix"></div>
                     </li>
 
@@ -200,18 +197,9 @@
                     <li data-content="withdrawals">
                       <div class="tab-image">
                         <img src="img/ithdrwls3.png" alt="withdrawals">
-                      </div>
-                      <p>If coins are in a Queue, they first have to be removed from the Queue. </p>
-                      <p>If coins are not locked in Masternode, they can be withdrawn at any moment. </p>
-                      <p>If coins are locked in Masternode, there are the following options: </p>
-
-                      <p>Make a request for return and if Queue has coins, the swap will happen and your coins will be returned from Masternode and coins from the Queue will replace your coins and be a part of Masternode. </p>
-
-                      <p>If the Queue doesn't have enough coins, all the coins that are not swapped will have to wait for 7 days to be swapped by coins from the Queue. </p>
-
-                      <p>If they are not swapped in 7 days, Masternode will be automatically dissolved, your coins will be returned to you and remaining coins from Masternode will be sent to the Queue.</p>
-
-                      <p>If one Masternode has 70% or more coins for which the return request is created, Masternode will be dissolved immediately. </p>
+                      </div>                      >
+                      <p>If coins are not saled for Masternode, they can be withdrawn. but you must wait until there will be replacing amount. </p>
+                      <p>If coins are locked in Masternode, please contact administrator via email or phone: </p>
                       <div class="clearfix"></div>
 
                     </li>

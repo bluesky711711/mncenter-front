@@ -15,7 +15,7 @@ use App\Word;
 
 class Reward extends Model
 {
-	protected $fillable = ['user_id', 'reward_amount', 'masternode_id'];
+	protected $fillable = ['user_id', 'reward_amount', 'masternode_id', 'type'];
 
 	public function user()
 	{

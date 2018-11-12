@@ -98,11 +98,12 @@ class updateSale extends Command
         Log::info($tran['confirmations']);
         if ($tran['confirmations'] > 5){
           $sale->status = "Completed";
+
           $data = [
             "api_key" => "MNCENTER_API_KEY_ENCRYPTED_1.0",
             "sale_id" => $sale->id,
             "user_email" => $user->email,
-            "sale_coin" => "GoByte",
+            "sale_coin" => $coin->coin_name,
             "sale_amount" => $sale->total_price,
             "sale_masternode_id" => $sale->masternode_id
           ];
