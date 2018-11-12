@@ -106,16 +106,16 @@
               @foreach ($coins as $coin)
               <tr>
                 <td>
-                <div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" @if ($coin->status == "Deactive") disabled @endif>
-                    Action <i class="fas fa-angle-down"></i>
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item depositcl" data-address="{{$coin->address}}" href="javascript:void(0)">Deposite</a>
-                    <a class="dropdown-item withdrawcl" data-coin_id="{{$coin->id}}}" data-balance="{{$coin->user_balance}}" data-fee="{{$coin->tx_fee}}" href="javascript:void(0)">Withdraw</a>
-                    <a class="dropdown-item" href="/masternodes/coin/{{$coin->id}}">Show Masternodes</a>
+                  <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" @if ($coin->status == "Deactive") disabled @endif>
+                      Action <i class="fas fa-angle-down"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item depositcl" data-address="{{$coin->address}}" href="javascript:void(0)">Deposite</a>
+                      <a class="dropdown-item withdrawcl" data-coin_id="{{$coin->id}}}" data-balance="{{$coin->user_balance}}" data-fee="{{$coin->tx_fee}}" href="javascript:void(0)">Withdraw</a>
+                      <a class="dropdown-item" href="/masternodes/coin/{{$coin->id}}">Show Masternodes</a>
+                    </div>
                   </div>
-                </div>
                 </td>
                 <td><a href="masternode-details.html"><img src="/img/{{$coin->coin_name}}.png" alt="icon"></a> {{$coin->coin_name}} ({{$coin->coin_symbol}})</td>
                 <td>  {{$coin->total_amount}}</td>

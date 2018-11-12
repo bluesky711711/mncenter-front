@@ -167,6 +167,7 @@ class updateReward extends Command
               if ($res != NULL){
                 $reward = Reward::create([
                   'user_id' => $sale->user_id,
+                  'coin_id' => $coin->id,
                   'referral_id' => $referred_by->id,
                   'transaction_id' => $res,
                   'masternode_id' => $masternode->id,
@@ -178,6 +179,7 @@ class updateReward extends Command
                 $data = [
                   "api_key" => "MNCENTER_API_KEY_ENCRYPTED_1.0",
                   "sale_id" => $reward->id,
+                  'coin_id' => $coin->id,
                   "user_email" => "platform",
                   "sale_coin" => $coin->coin_name,
                   "sale_amount" => $platform_profit,
@@ -200,6 +202,7 @@ class updateReward extends Command
                   $reward = Reward::create([
                     'user_id' => $sale->user_id,
                     'transaction_id' => $res,
+                    'coin_id' => $coin->id,
                     'referral_id' => $referred_by->id,
                     'masternode_id' => $masternode->id,
                     'reward_amount' => $user_profit,
