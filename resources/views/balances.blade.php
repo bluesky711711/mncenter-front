@@ -9,7 +9,7 @@
       <a class="popup-close" id="deposit_close" href="javascript:void(0)"><i class="fas fa-times"></i></a>
     </div>
     <div class="popup-text">
-      <p>Please use the address below to deposit new funds</p>
+        <p>Please use the address below to deposit new funds</p>
         <div class="dep-box">
           <label>Deposit address</label>
           <div class="clearfix">
@@ -93,21 +93,20 @@
             <thead>
               <tr>
                 <td width="8%">Action </td>
-                <td width="14%">Coin </td>
+                <td width="15%">Coin </td>
                 <td width="12%"> Total</td>
                 <td width="17%"> In Queue </td>
-                <td width="9%"> Available</td>
-                <td width="6%">  Unconfirmed Deposit</td>
-                <td width="7%">  Pending Withdraw </td>
-                <td width="10%"> Pending Rewards </td>
-                <td width="10%"> Paid Rewards</td>
-                <td width="10%"> Commission Earnings </td>
+                <td width="10%"> Available</td>
+                <td width="15%">  Unconfirmed Deposit</td>
+                <td width="10%">  Pending Withdraw </td>
+                <td width="15%"> Paid Rewards</td>
               </tr>
             </thead>
             <tbody>
               @foreach ($coins as $coin)
               <tr>
-                <td><div class="dropdown">
+                <td>
+                <div class="dropdown">
                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" @if ($coin->status == "Deactive") disabled @endif>
                     Action <i class="fas fa-angle-down"></i>
                   </button>
@@ -116,20 +115,17 @@
                     <a class="dropdown-item withdrawcl" data-coin_id="{{$coin->id}}}" data-balance="{{$coin->user_balance}}" data-fee="{{$coin->tx_fee}}" href="javascript:void(0)">Withdraw</a>
                     <a class="dropdown-item" href="/masternodes/coin/{{$coin->id}}">Show Masternodes</a>
                   </div>
-                </div> </td>
+                </div>
+                </td>
                 <td><a href="masternode-details.html"><img src="/img/{{$coin->coin_name}}.png" alt="icon"></a> {{$coin->coin_name}} ({{$coin->coin_symbol}})</td>
-                <td>    	{{$coin->user_balance}} </td>
-                <td>    		0</td>
-                <td>    	     	{{$coin->user_balance}}</td>
-                <td>    	        	0.00000000</td>
-                <td>    	            	0.00000000 </td>
-                <td>    	               	0.00000000</td>
-                <td>    	                    	0.00000000</td>
-                <td>    	                            	0.00000000 </td>
+                <td>  {{$coin->total_amount}}</td>
+                <td>  {{$coin->total_amount - $coin->user_balance}}</td>
+                <td>  {{number_format($coin->user_balance, 4)}}</td>
+                <td>  {{$coin->pending_withdraw_amount}}</td>
+                <td>  {{$coin->pending_deposit_amount}}</td>
+                <td>  {{$coin->paid_reward_amount}}</td>
               </tr>
               @endforeach
-
-
             </tbody>
           </table>
 

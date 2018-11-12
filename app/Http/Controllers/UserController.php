@@ -47,6 +47,34 @@ class UserController extends Controller
         if ($coin->status != "Active"){
           continue;
         }
+        $sales = Sale::where('status', 'completed')->where('coin_id', $coin->id)->where('user_id', $user->id)->get();
+        $total_amount = 0;
+        foreach ($sales as $sale){
+          $total_amount += $sale->total_price;
+        }
+
+        $withdraws = Transaction::where('status', 'pending')->where('type', 'WITHDRAW')->where('coin_id', $coin->id)->where('user_id', $user->id)->get();
+        $pending_withdraw_amount = 0;
+        foreach ($withdraws as $withdraw){
+          $pending_withdraw_amount = $pending_withdraw_amount + floatval($withdraw->amount);
+        }
+        $coin->pending_withdraw_amount = $pending_withdraw_amount;
+
+        $deposits = Transaction::where('status', 'pending')->where('type', 'DEPOSIT')->where('coin_id', $coin->id)->where('user_id', $user->id)->get();
+        $pending_deposit_amount = 0;
+        foreach ($deposits as $deposit){
+          $pending_deposit_amount = $pending_deposit_amount + floatval($deposit->amount);
+        }
+        $coin->pending_deposit_amount = $pending_deposit_amount;
+
+        $rewards = Reward::where('status', 'completed')->where('user_id', $user->id)->where('coin_id', $coin->id)->where('type', 'to_user')->get();
+
+        $paid_reward_amount = 0;
+        foreach ($rewards as $reward){
+          $paid_reward_amount = $paid_reward_amount + floatval($reward->reward_amount);
+        }
+        $coin->paid_reward_amount = $paid_reward_amount;
+
         $masternodes = Masternode::where('coin_id', $coin->id)->where('status', 'completed')->get();
         $coin->completed_mn_count = count($masternodes);
 
@@ -55,13 +83,11 @@ class UserController extends Controller
         if ($masternode) $coin->queue_masternode = $masternode;
 
         $wallet = Wallet::where('coin_id', $coin->id)->where('user_id', $user->id)->first();
-
         $coin->address = $wallet->wallet_address;
-
-
         $coin->tx_fee = 0;
+        $coin->user_balance = floatval($wallet->balance);
+        $coin->total_amount = floatval($total_amount) + floatval($wallet->balance);
 
-        $coin->user_balance = $wallet->balance;
 
       }
 
