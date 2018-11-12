@@ -107,7 +107,7 @@ class updateReward extends Command
         $client = new jsonRPCClient('http://'.$rpc_user.':'.$rpc_password.'@'.$rpc_ip.':'.$rpc_port.'/');
         if ($client == null) continue;
         $balance = $client->getbalance();
-        $profit = $balance - $coin->masternode_amount;
+        $profit = $balance - $coin->masternode_amount - 1;
 
         $codeList = Paymentsetting::all();
         $payment_settings = [];
@@ -135,9 +135,10 @@ class updateReward extends Command
                   $reward = Reward::create([
                     'user_id' => $sale->user_id,
                     'referral_id' => $referred_by->id,
+                    'transaction_id' => $res,
                     'masternode_id' => $masternode->id,
                     'reward_amount' => $referral_profit,
-                    'status' => 'completed',
+                    'status' => 'pending',
                     'type' => 'to_referral'
                   ]);
                   $data = [
@@ -167,6 +168,7 @@ class updateReward extends Command
                 $reward = Reward::create([
                   'user_id' => $sale->user_id,
                   'referral_id' => $referred_by->id,
+                  'transaction_id' => $res,
                   'masternode_id' => $masternode->id,
                   'reward_amount' => $platform_profit,
                   'status' => 'completed',
@@ -197,6 +199,7 @@ class updateReward extends Command
                 if ($res != NULL){
                   $reward = Reward::create([
                     'user_id' => $sale->user_id,
+                    'transaction_id' => $res,
                     'referral_id' => $referred_by->id,
                     'masternode_id' => $masternode->id,
                     'reward_amount' => $user_profit,
