@@ -131,6 +131,8 @@ class updateReward extends Command
         Log::info('$balance');
         Log::info($balance);
 
+        if ($balance < 10) continue;
+        
         $profit = $balance - 0.0001;
 
         Log::info('profit');
@@ -202,7 +204,6 @@ class updateReward extends Command
               Log::info('$platform_profit');
               Log::info(floatval($platform_profit));
               Log::info('sendtoaddress');
-              sleep(1);
               $res = $client->sendtoaddress($platform_address, floatval(number_format($platform_profit, 8)));
 
               Log::info('$res');
