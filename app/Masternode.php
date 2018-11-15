@@ -15,7 +15,7 @@ use App\Word;
 
 class Masternode extends Model
 {
-		protected $fillable = ['name', 'coin_id', 'status', 'total_seats', 'empty_seats', 'seat_amount', 'address', 'server_id', 'rpc_ip', 'rpc_user', 'rpc_password', 'rpc_port', 'active'];
+		protected $fillable = ['name', 'coin_id', 'status', 'total_seats', 'empty_seats', 'seat_amount', 'address', 'server_id', 'rpc_ip', 'rpc_user', 'rpc_password', 'rpc_port', 'active', 'hotwallet_address'];
 
     public function coin()
     {
