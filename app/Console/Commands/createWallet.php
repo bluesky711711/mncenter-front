@@ -52,7 +52,7 @@ class createWallet extends Command
           $wallet = Wallet::where('coin_id', $coin->id)->where('user_id', $user_id)->first();
 
           if ($wallet){
-            Log::info('wallet exist');
+            continue;
           } else  {
             $rpc_user = $coin->rpc_user;
             $rpc_password = $coin->rpc_password;

@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\Coin;
 use App\Wallet;
 use App\User;
+use App\Masternode;
 use App\Http\Controllers\Rpc\jsonRPCClient;
 use Log;
 class testCommand extends Command
@@ -41,14 +42,15 @@ class testCommand extends Command
      */
     public function handle()
     {
-      $coin = Coin::where('id', 7)->first();
+      $coin = Masternode::where('id', 4)->first();
       $rpc_user = $coin->rpc_user;
       $rpc_password = $coin->rpc_password;
       $rpc_port= $coin->rpc_port;
       $rpc_ip= $coin->rpc_ip;
       $client = new jsonRPCClient('http://'.$rpc_user.':'.$rpc_password.'@'.$rpc_ip.':'.$rpc_port.'/');
-      $to_address = 'bW2RPzUYL2WhHVkmraKsUL36F6H81xNZ1N';
-      $amount = '0.1';
+      $to_address = 'NcBZUWBD1sGU6pE9j5Lqg3yaA9M2EBqwGT';
+      $amount = '0.001043495';
+      
       Log::info('-------------------test----------------------------');
       Log::info($coin);
       Log::info($rpc_user);
@@ -57,7 +59,7 @@ class testCommand extends Command
       Log::info($rpc_port);
       Log::info($to_address);
       Log::info($amount);
-      $info = $client->sendtoaddress($to_address, $amount);
+      $info = $client->sendtoaddress($to_address, floatval($amount));
       Log::info($info);
     }
 }

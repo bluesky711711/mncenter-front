@@ -77,6 +77,7 @@ class updatePrice extends Command
       $coins = Coin::all();
       foreach ($coins as $coin){
           Log::info($coin->coin_name);
+          if ($coin->id == 16) continue;
           $decoded_json = json_decode(file_get_contents("https://api.coinmarketcap.com/v1/ticker/".strtolower($coin->coin_name)), TRUE);
           if (isset($decoded_json[0])){
             $price_usd = $decoded_json[0]['price_usd'];

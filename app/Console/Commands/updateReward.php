@@ -132,7 +132,7 @@ class updateReward extends Command
         Log::info($balance);
 
         $profit = $balance - 0.0001;
-        
+
         Log::info('profit');
         Log::info($profit);
 
@@ -157,7 +157,8 @@ class updateReward extends Command
               $referred_by = User::where('id', $referred_by->referred_by)->first();
               $referral_wallet = Wallet::where('user_id', $referred_by->id)->where('coin_id', $coin->id)->first();
               if ($referral_wallet && $referral_wallet->wallet_address != ''){
-                $res = $client->sendtoaddress($referral_wallet->wallet_address, floatval($referral_profit));
+
+                $res = $client->sendtoaddress($referral_wallet->wallet_address, floatval(number_format($referral_profit, 8)));
 
                 if ($res != NULL){
                   $reward = Reward::create([
@@ -202,7 +203,7 @@ class updateReward extends Command
               Log::info(floatval($platform_profit));
               Log::info('sendtoaddress');
               sleep(1);
-              $res = $client->sendtoaddress($platform_address, floatval($platform_profit));
+              $res = $client->sendtoaddress($platform_address, floatval(number_format($platform_profit, 8)));
 
               Log::info('$res');
               Log::info($res);
@@ -248,7 +249,7 @@ class updateReward extends Command
             if ($user_wallet && $user_wallet->wallet_address != ''){
                 Log::info('$user_profit');
                 Log::info($user_profit);
-                $res = $client->sendtoaddress($user_wallet->wallet_address, floatval($user_profit));
+                $res = $client->sendtoaddress($user_wallet->wallet_address, floatval(number_format($user_profit,8)));
                 if ($res != NULL){
                   $referrer_id = NULL;
                   if (isset($referred_by->id))  $referrer_id = $referred_by->referred_by;
