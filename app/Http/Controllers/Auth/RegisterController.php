@@ -171,9 +171,11 @@ class RegisterController extends Controller
       $email = $request->input('email');
       $user = User::where('email', $email)->first();
       if (isset($user->id)){
-        $user['password'] = $this->RandomString(8);
+        $password = $this->RandomString(8);
+        $user->password = bcrypt($password);
         $user->save();
         $user = $user->toArray();
+        $user['password'] = $password;
         Mail::send('emails.forgetpassword', $user, function($message) use ($user) {
             $message->to($user['email']);
             $message->subject('Site - Reset Password');
