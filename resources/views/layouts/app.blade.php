@@ -15,7 +15,7 @@
 
   <!-- Bootstrap Core CSS -->
   <link href="/css/bootstrap.css" rel="stylesheet">
-  <link rel="shortcut icon" href="img/fav-icon.png">
+  <link rel="shortcut icon" href="/img/fav-icon.png">
 
   <!-- Custom CSS -->
   <link href="/css/style.css" rel="stylesheet">
@@ -97,13 +97,13 @@
                   <li><a class="page-scroll" href="/balances">Balances</a></li>
                   <li><a class="page-scroll" href="/videos">Videos</a></li>
                   @endif
-                  <li class="dropdown">
+                  <li class="dropdown header-dropdown">
                     @if (!Auth::guest())
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i style="margin-right:6px;" class="far fa-user"></i>{{Auth::user()->name}}<b class="caret"></b></a>
                     @else
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i style="margin-right:6px;" class="far fa-user"></i>Account <b class="caret"></b></a>
                     @endif
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu header-dropdown-menu">
                       @if (!Auth::guest())
                       <li><a href="/deposit_history">Deposit History</a></li>
                       <li><a href="/withdrawal_history">Withdrawal History</a></li>
@@ -153,5 +153,23 @@
     e.preventDefault();
     document.getElementById('logout-form').submit();
   }
+
+  function detectmob() {
+    console.log(window.innerWidth, window.innerHeight);
+     if(window.innerWidth <= 800) {
+       return true;
+     } else {
+       return false;
+     }
+  }
+
+  $('.navbar-toggle').click(function(){
+    console.log('toggle');
+    if (detectmob()){
+      setTimeout(function(){
+        $('.header-dropdown').removeClass('open').addClass('open');
+      }, 100);
+    }
+  });
   </script>
   </html>

@@ -2,7 +2,7 @@
 	}
 
 @media only screen and (min-width:1101px) and (max-width: 1190px){
-	
+
 			.container{ width:95%;}
 s	.half-divider::before{ width:80%;}
 	.cd-tabs-navigation a.selected{ box-shadow:none;}
@@ -51,7 +51,7 @@ s	.half-divider::before{ width:80%;}
 	}
 
 @media only screen and (min-width:901px) and (max-width:992px){
-	
+
 		.container{ width:95%;}
 	.half-divider::before{ width:80%;}
 	.cd-tabs-navigation a.selected{ box-shadow:none;}
@@ -65,18 +65,18 @@ s	.half-divider::before{ width:80%;}
 .nav-main{ float:right; width:62%;}
 .logo{ float:left; width:36%;}
 
-	
+
 }
 
 @media only screen and (min-width:801px) and (max-width:900px){
-	
+
 	.container{ width:95%;}
 	.navbar-nav {
 	float: none;
 	text-align: center;
 	margin-right: -32px;
 	clear: both;
-	
+
 	}
 	.half-divider::before{ width:80%;}
 	.cd-tabs-navigation a.selected{ box-shadow:none;}
@@ -91,7 +91,7 @@ s	.half-divider::before{ width:80%;}
 .nav-main{ float:right;}
 .logo{ float:left; width:36%;}
 }
-	
+
 @media only screen and (min-width:768px) and (max-width:800px){
 			.container{ width:95%;}
 		ul.header-num{  text-align:center;}
@@ -124,12 +124,12 @@ s	.half-divider::before{ width:80%;}
     margin-right: -32px;
     clear: both;
 }.cd-tabs-content li{ padding:25px;}
-.popup-min , .deposite-box{ width:90%; left:5%;} 
+.popup-min , .deposite-box{ width:90%; left:5%;}
 	.popup-head h3{ font-size:23px;}
 	.navbar-nav > li{ float:none;}
 	.nav-main{ clear:both;}
 
-	
+
 }
 
 
@@ -169,21 +169,21 @@ s	.half-divider::before{ width:80%;}
 		.cd-tabs nav{ background:none;}
 		.welcome-img img{ margin:0 auto;}
 		.faq-img{ text-align:center;}
-			.popup-min , .deposite-box{ width:90%; left:5%;} 
+			.popup-min , .deposite-box{ width:90%; left:5%;}
 	.popup-head h3{ font-size:23px;}
 	.set-box{ margin-left:0; margin-top:15px;}
-		.dropdown-menu{ width:100% !important; background:rgba(0,0,0,0.4); opacity:1 !important; display:block !important;}
-	.navbar-nav .open .dropdown-menu{background:rgba(0,0,0,0.4)}
-	.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus , .dropdown-menu > li > a{ color:#ddd;}
+		.header-dropdown-menu{ width:100% !important; background:rgba(0,0,0,0.4); opacity:1 !important; display:block !important;}
+	.navbar-nav .open .header-dropdown-menu{background:rgba(0,0,0,0.4)}
+	.navbar-default .navbar-nav .open .header-dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .header-dropdown-menu > li > a:focus , .header-dropdown-menu > li > a{ color:#ddd;}
 
 
 	}
 
 
-	
-	
+
+
 @media only screen and (min-width:601px) and (max-width:700px){
-	
+
 	.container{ width:95%;}
 		ul.header-num{ font-size:12px; text-align:center;}
 		ul.header-num li{ margin-left:5px;}
@@ -218,13 +218,13 @@ s	.half-divider::before{ width:80%;}
 		.cd-tabs-navigation a{ font-size: 12px; padding: 5px 10px;}
 		.cd-tabs-navigation li{ margin-bottom:6px;}
 		.cd-tabs nav{ background:none;}
-			.popup-min , .deposite-box{ width:94%; left:4%;} 
+			.popup-min , .deposite-box{ width:94%; left:4%;}
 	.popup-head h3{ font-size:23px;}
 	.mas-table{ overflow:scroll; width:100%;}
 	.set-box{ margin-left:0; margin-top:15px;}
-			.dropdown-menu{ width:100% !important; background:rgba(0,0,0,0.4); opacity:1 !important; display:block !important;}
-	.navbar-nav .open .dropdown-menu{background:rgba(0,0,0,0.4)}
-	.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus , .dropdown-menu > li > a{ color:#ddd;}
+			.header-dropdown-menu{ width:100% !important; background:rgba(0,0,0,0.4); opacity:1 !important; display:block !important;}
+	.navbar-nav .open .header-dropdown-menu{background:rgba(0,0,0,0.4)}
+	.navbar-default .navbar-nav .open .header-dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .header-dropdown-menu > li > a:focus , .header-dropdown-menu > li > a{ color:#ddd;}
 
 
 }
@@ -265,23 +265,23 @@ s	.half-divider::before{ width:80%;}
 	.cd-tabs-navigation a.selected{ box-shadow:none;}
 	.cd-tabs-navigation a{ font-size: 12px; padding: 5px 10px;}
 	.cd-tabs-navigation li{ margin-bottom:6px;}
-	.cd-tabs nav{ background:none;}	
+	.cd-tabs nav{ background:none;}
 	.login-field .form-control{ width:84%;}
-		.popup-min , .deposite-box{ width:94%; left:4%;} 
+		.popup-min , .deposite-box{ width:94%; left:4%;}
 	.popup-head h3{ font-size:24px;}
 	.mas-table{ overflow:scroll; width:100%;}
 		.faq-min .pogramsArea ul li a{ height:auto; line-height: normal; padding: 5px 15px; font-size:12px;}
 	.faq-det .pogramsArea ul li a span.icon{ width:20px;}
 	.set-box{ margin-left:0; margin-top:15px;}
 	.chart img{ display:block; width:100%;}
-	.dropdown-menu{ width:100% !important; background:rgba(0,0,0,0.4); opacity:1 !important; display:block !important;}
-	.navbar-nav .open .dropdown-menu{background:rgba(0,0,0,0.4)}
-	.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus , .dropdown-menu > li > a{ color:#ddd;}
+	.header-dropdown-menu{ width:100% !important; background:rgba(0,0,0,0.4); opacity:1 !important; display:block !important;}
+	.navbar-nav .open .header-dropdown-menu{background:rgba(0,0,0,0.4)}
+	.navbar-default .navbar-nav .open .header-dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .header-dropdown-menu > li > a:focus , .header-dropdown-menu > li > a{ color:#ddd;}
 
 
 
 }
-	
+
 @media only screen and (min-width:321px) and (max-width:480px)
 {
 .container{ width:95%;}
@@ -319,7 +319,7 @@ s	.half-divider::before{ width:80%;}
 	.cd-tabs-navigation li{ margin-bottom:6px;}
 	.cd-tabs nav{ background:none;}
 	.login-field .form-control{ width:84%;}
-		.popup-min , .deposite-box{ width:94%; left:4%;} 
+		.popup-min , .deposite-box{ width:94%; left:4%;}
 	.popup-head h3{ font-size:23px;}
 	.mas-table{ overflow:scroll; width:100%;}
 	.dep-box .form-control{ border-right:1px solid #fff; margin-bottom:5px;  width:95%}
@@ -327,14 +327,14 @@ s	.half-divider::before{ width:80%;}
 	.faq-det .pogramsArea ul li a span.icon{ width:20px;}
 	.set-box{ margin-left:0; margin-top:15px;}
 	.chart img{ display:block; width:100%;}
-	.dropdown-menu{ width:100% !important; background:rgba(0,0,0,0.4); opacity:1 !important; display:block !important;}
-	.navbar-nav .open .dropdown-menu{background:rgba(0,0,0,0.4)}
-	.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus , .dropdown-menu > li > a{ color:#ddd;}
+	.header-dropdown-menu{ width:100% !important; background:rgba(0,0,0,0.4); opacity:1 !important; display:block !important;}
+	.navbar-nav .open .header-dropdown-menu{background:rgba(0,0,0,0.4)}
+	.navbar-default .navbar-nav .open .header-dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .header-dropdown-menu > li > a:focus , .header-dropdown-menu > li > a{ color:#ddd;}
 
 
-}	
+}
 
-	
+
 @media only screen and (min-width:240px) and (max-width:320px)
 
 {
@@ -373,7 +373,7 @@ s	.half-divider::before{ width:80%;}
 	.cd-tabs-navigation li{ margin-bottom:6px;}
 	.cd-tabs nav{ background:none;}
 	.login-field .form-control{ width:84%;}
-	.popup-min , .deposite-box{ width:94%; left:4%;} 
+	.popup-min , .deposite-box{ width:94%; left:4%;}
 	.popup-head h3{ font-size:23px;}
 	.mas-table{ overflow:scroll; width:100%;}
 	.dep-box .form-control{ border-right:1px solid #fff; margin-bottom:5px; width:95%}
@@ -381,8 +381,8 @@ s	.half-divider::before{ width:80%;}
 	.faq-det .pogramsArea ul li a span.icon{ width:20px;}
 	.set-box{ margin-left:0; margin-top:15px;}
 	.chart img{ display:block; width:100%;}
-	.dropdown-menu{ width:100% !important; background:rgba(0,0,0,0.4); opacity:1 !important; display:block !important;}
-	.navbar-nav .open .dropdown-menu{background:rgba(0,0,0,0.4)}
-	.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus , .dropdown-menu > li > a{ color:#ddd;}
-	
+	.header-dropdown-menu{ width:100% !important; background:rgba(0,0,0,0.4); opacity:1 !important; display:block !important;}
+	.navbar-nav .open .header-dropdown-menu{background:rgba(0,0,0,0.4)}
+	.navbar-default .navbar-nav .open .header-dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .header-dropdown-menu > li > a:focus , .header-dropdown-menu > li > a{ color:#ddd;}
+
 }

@@ -53,11 +53,11 @@
                       </div>
                     </li>
 
-                    <li class="same" id="tab-4"><a class="tabinActive" id="atab-3" href="javascript:void(0)">How can I trust MyNode.rocks with my investment?<span class="icon"> <i class="fas fa-plus"></i></span></a>
+                    <li class="same" id="tab-4"><a class="tabinActive" id="atab-3" href="javascript:void(0)">How can I trust MNCenter.online with my investment?<span class="icon"> <i class="fas fa-plus"></i></span></a>
                       <div id="1stslide-4" class="openSlide" style="display:none;">
                         <p>
 
-                          MyNode.rocks is relatively 'new' however, we have a very transparent and automated system. All of our users can track and monitor the rewards for each of the Masternode and get rewards paid out instantaneously, not weekly or every few days. </p>
+                          MNCenter.online is relatively 'new' however, we have a very transparent and automated system. All of our users can track and monitor the rewards for each of the Masternode and get rewards paid out instantaneously, not weekly or every few days. </p>
 
                           <p>The system is automated so this prevents 'many hands' getting involved or any manual movements of funds hence, the risk of anyone stealing funds are greatly reduced. </p>
 
@@ -66,10 +66,10 @@
                         </div>
                       </li>
 
-                      <li class="same" id="tab-5"><a class="tabinActive" id="atab-3" href="javascript:void(0)">How do I start using MyNode.rocks? <span class="icon"> <i class="fas fa-plus"></i></span></a>
+                      <li class="same" id="tab-5"><a class="tabinActive" id="atab-3" href="javascript:void(0)">How do I start using MNCenter.online? <span class="icon"> <i class="fas fa-plus"></i></span></a>
                         <div id="1stslide-5" class="openSlide" style="display:none;">
                           <p>
-                            MyNode.rocks is a share Masternode service, fully controlled by the user and managed automatically through the website. To start using the Shared Masternode services register an account via Account > Register.
+                            MNCenter.online is a share Masternode service, fully controlled by the user and managed automatically through the website. To start using the Shared Masternode services register an account via Account > Register.
                           </p>
                         </div>
                       </li>

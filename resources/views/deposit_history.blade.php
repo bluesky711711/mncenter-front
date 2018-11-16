@@ -76,9 +76,7 @@ $(document).ready(function(){
 });
 </script>
 <script type="text/javascript">
-$(function(){
-  SyntaxHighlighter.all();
-});
+
 $(window).load(function(){
   $('.flexslider').flexslider({
     animation: "fade",

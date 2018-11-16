@@ -112,7 +112,7 @@
                     <td style="text-align:center">@if ($coin->queue_masternode) {{$coin->queue_masternode->seat_amount * $coin->seat_price}} ({{$coin->queue_masternode->seat_amount * 100 / $coin->queue_masternode->total_seats}}%) @endif</td>
                     <td style="text-align:center">@if ($coin->queue_masternode) {{$coin->queue_masternode->empty_seats * $coin->seat_price}} ({{$coin->queue_masternode->empty_seats * 100 / $coin->queue_masternode->total_seats}}%) @endif</td>
                     <td style="text-align:center">{{number_format($coin->coin_price, 6)}} $</td>
-                    <td style="text-align:center">{{number_format($coin->coin_price * $coin->masternode_amount, 2)}} $</td>
+                    <td style="text-align:center">{{floatval($coin->coin_price) * intval($coin->masternode_amount)}} $</td>
                 </tr>
             @endforeach
           </tbody>
