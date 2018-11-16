@@ -132,7 +132,7 @@ class updateReward extends Command
         Log::info($balance);
 
         if ($balance < 10) continue;
-        
+
         $profit = $balance - 0.0001;
 
         Log::info('profit');
@@ -165,6 +165,7 @@ class updateReward extends Command
                 if ($res != NULL){
                   $reward = Reward::create([
                     'user_id' => $sale->user_id,
+                    'coin_id' => $coin->id,
                     'referral_id' => $referred_by->id,
                     'transaction_id' => $res,
                     'masternode_id' => $masternode->id,
@@ -187,7 +188,7 @@ class updateReward extends Command
                   Log::info('referral recordrewards');
                   Log::info($res);
                   $res = json_decode($res);
-                  if ($res->status == "failed"){
+                  if (isset($res->status) && $res->status == "failed"){
                     $code = Generalsetting::firstOrCreate(["name" => "etherem_balance_status"]);
                     $code->value = false;
                     $code->save();
@@ -233,12 +234,12 @@ class updateReward extends Command
                 ];
                 $data_string = json_encode($data);
                 Log::info('user, datastring');
-                Log::info($data_string);
+                Log::info($data_string);                
                 $res = $this->CallAPI('POST', 'http://95.179.179.106:3000/api/recordrewords', $data_string);
                 Log::info('referral $res');
                 Log::info($res);
                 $res = json_decode($res);
-                if ($res->status == "failed"){
+                if (isset($res->status) && $res->status == "failed"){
                   $code = Generalsetting::firstOrCreate(["name" => "etherem_balance_status"]);
                   $code->value = false;
                   $code->save();
@@ -279,7 +280,7 @@ class updateReward extends Command
                   Log::info('referral $res');
                   Log::info($res);
                   $res = json_decode($res);
-                  if ($res->status  == "failed"){
+                  if (isset($res->status) && $res->status  == "failed"){
                     $code = Generalsetting::firstOrCreate(["name" => "etherem_balance_status"]);
                     $code->value = false;
                     $code->save();
