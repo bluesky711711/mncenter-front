@@ -20,17 +20,18 @@
 <h3>Password for</h3>
 <div class="accent-bg"></div>
 <div class="login-form">
-<form action="" method="get">
 
+<form class="form-horizontal" role="form" method="POST"  action="{{ url('/password/email') }}">
 <label>Your Email:</label>
 <div class="login-field">
-<input type="email" class="form-control" placeholder="Email">
+<input type="email" name="email" class="form-control" placeholder="Email">
+@if ($errors->has('email'))
+    <span class="color:#fff">{{ $errors->first('email') }}</span>
+@endif
 </div>
-
-
 <button class="btn login-btn">Send</button>
-
 </form>
+
 </div>
 <div class="button-area">
 

@@ -21,18 +21,22 @@
     <h3>Password for</h3>
     <div class="accent-bg"></div>
     <div class="login-form">
-    <form action="" method="get">
+    <form id="resetPasswordForm" class="form-horizontal" role="form" method="POST" action="{{ url('/password/reset') }}">
+      <label>Email </label>
+      <div class="login-field">
+        <input type="email" name="email" class="form-control" placeholder="password">
+        </div>
     <label>New password</label>
     <div class="login-field">
-      <input type="password" class="form-control" placeholder="password">
+      <input type="password" name="password" class="form-control" placeholder="password">
       </div>
        <label>New password confirmation</label>
       <div class="login-field">
-      <input type="password" class="form-control" placeholder="confirm password">
+      <input type="password" name="password_confirmation" class="form-control" placeholder="confirm password">
       </div>
 
 
-        <button class="btn login-btn">Save</button>
+      <button class="btn login-btn">Save</button>
 
     </form>
     </div>
