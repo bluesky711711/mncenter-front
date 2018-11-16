@@ -171,7 +171,7 @@ class RegisterController extends Controller
       $email = $request->input('email');
       $user = User::where('email', $email)->first();
       if (isset($user->id)){
-        $password = $this->RandomString(8);
+        $password = $this->RandomString();
         $user->password = bcrypt($password);
         $user->save();
         $user = $user->toArray();
