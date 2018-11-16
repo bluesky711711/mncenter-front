@@ -156,4 +156,29 @@ class RegisterController extends Controller
 
         return redirect()->to('login')->with('warning',"your token is invalid.");
     }
+
+    public function RandomString()
+    {
+        $characters = '123456789abcdefghjkmnopqrstuvwxyzABCDEFGHJKMNOPQRSTUVWXYZ';
+        $randstring = '';
+        for ($i = 0; $i < 10; $i++) {
+            $randstring = $characters[rand(0, strlen($characters))];
+        }
+        return $randstring;
+    }
+
+    public function forgetpassword(Request $request){
+      $email = $request->input('email');
+      $user = User::where('email', $email)->first();
+      if (isset($user->id)){
+        $user['password'] = $this->RandomString(8);
+        $user->save();
+        Mail::send('emails.forgetpassword', $user, function($message) use ($user) {
+            $message->to($user['email']);
+            $message->subject('Site - Reset Password');
+        });
+        return back()->with('success', 'We have sent password to your email!');
+      }
+      return back()->with('failed', 'Your email is not registered yet!');
+    }
 }

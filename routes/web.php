@@ -34,3 +34,4 @@ Route::get('/user_settings', 'UserController@user_settings')->name('user_setting
 Route::post('/withdraw', 'UserController@withdraw_post')->name('withdraw_post');
 Route::post('/buyseats', 'UserController@buyseats')->name('buyseats');
 Route::post('/resendToken', 'Auth\RegisterController@resendToken')->name('resendToken');
+Route::post('/forgetpassword', 'Auth\RegisterController@forgetpassword')->name('forgetpassword');

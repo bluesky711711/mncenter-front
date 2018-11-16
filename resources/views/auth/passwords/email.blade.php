@@ -20,8 +20,17 @@
 <h3>Password for</h3>
 <div class="accent-bg"></div>
 <div class="login-form">
-
-<form class="form-horizontal" role="form" method="POST"  action="{{ url('/password/email') }}">
+  @if ($message = Session::get('success'))
+      <div class="alert alert-success">
+          <p>{{ $message }}</p>
+      </div>
+  @endif
+  @if ($message = Session::get('failed'))
+      <div class="alert alert-danger">
+          <p>{{ $message }}</p>
+      </div>
+  @endif
+<form class="form-horizontal" role="form" method="POST"  action="/forgetpassword">
 <label>Your Email:</label>
 <div class="login-field">
 <input type="email" name="email" class="form-control" placeholder="Email">
