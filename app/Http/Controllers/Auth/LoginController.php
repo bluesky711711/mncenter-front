@@ -60,7 +60,7 @@ class LoginController extends Controller
 
             return redirect()->to('home');
         } else {
-            return back()->with('error','Your username and password are wrong.');
+            return back()->with('error','Your username or password are wrong.');
         }
     }
 }
