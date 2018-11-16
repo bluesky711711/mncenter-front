@@ -162,7 +162,7 @@ class RegisterController extends Controller
         $characters = '123456789abcdefghjkmnopqrstuvwxyzABCDEFGHJKMNOPQRSTUVWXYZ';
         $randstring = '';
         for ($i = 0; $i < 10; $i++) {
-            $randstring = $characters[rand(0, strlen($characters))];
+            $randstring = $randstring.$characters[rand(0, strlen($characters))];
         }
         return $randstring;
     }
