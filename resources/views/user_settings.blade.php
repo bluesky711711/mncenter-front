@@ -37,72 +37,44 @@
         <div class="accent-bg"></div>
         <ul>
           <li><span>Code:</span>referral-{{$user->id}}</li>
-          <li><span>Referred:</span>0</li>
-          <li><span>Earnings:</span>0.0%</li>
-
-
-
+          <li><span>Referred:</span>{{count($referrals)}}</li>
+          <li><span>Earnings:</span>1%</li>
         </ul>
         <div class="clearfix"></div>
       </div>
     </div>
 
+    <div class="col-md-6">
+      <div class="set-box">
+        <div class="ref-head">Reset Password</div>
+        <div class="accent-bg"></div>
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success">
+                <p>{{ $message }}</p>
+            </div>
+        @endif
+        @if ($message = Session::get('failed'))
+            <div class="alert alert-danger">
+                <p>{{ $message }}</p>
+            </div>
+        @endif
+        <form class="form-horizontal" role="form" method="POST"  action="/changepassword">
+        <input type="hidden" name="id" value="{{$user->id}}" />
+        <label>New password:</label>
+        <div class="login-field">
+          <input type="password" name="password" class="form-control">
+        </div>
+        <label>Confirm password:</label>
+        <div class="login-field">
+          <input type="password" name="password-confirmation" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Reset</button>
+        </form>
+        <div class="clearfix"></div>
+      </div>
+    </div>
   </div>
   <div class="clearfix"></div>
 </section>
-
-<!--Start Part-2-->
-
-
-
-
-
-
-
-
-<script>
-$(document).ready(function(){
-  $(".same").click(function(){
-    var sliderid = $(this).attr("id");
-
-    var n = sliderid.split('-');
-    var indid = (n[1]);
-
-    $( ".openSlide" ).slideUp( "fast", function() {
-      $( ".tabActive" ).removeClass( "tabActive" );
-
-    });
-
-    $( "#1stslide-" + indid ).slideDown( "fast", function() {
-      $( "#atab-" + indid ).removeClass( "tabinActive").addClass("tabActive");
-
-    });
-
-
-
-  });
-});
-</script>
-<script type="text/javascript">
-
-$(window).load(function(){
-  $('.flexslider').flexslider({
-    animation: "fade",
-    start: function(slider){
-      $('body').removeClass('loading');
-    }
-  });
-
-  $('ul.nav li.dropdown').hover(function() {
-    $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-  }, function() {
-    $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-  });
-});
-
-</script>
-
-
-
 
 @endsection

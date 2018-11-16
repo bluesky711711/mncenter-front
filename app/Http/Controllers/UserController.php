@@ -14,8 +14,11 @@ use App\Wallet;
 use App\User;
 use App\Sale;
 use App\Paymentsetting;
+use App\Referral;
+
 use App\Http\Controllers\Rpc\jsonRPCClient;
 use Log;
+use Mail;
 class UserController extends Controller
 {
     /**
@@ -157,11 +160,19 @@ class UserController extends Controller
     public function user_settings()
     {
         $user_id = Auth::user()->id;
-        Log::info($user_id);
         $user = User::where('id', $user_id)->first();
+        $referrals = Referral::where('referred_by', $user->id)->get();
+
+        $rewards = Reward::where('referral_id', $user->id)->where('type', 'to_referral')->get();
+        $profit = 0;
+        foreach ($rewards as $reward){
+          $profit = $reward->reward_amount + $profit;
+        }
         return view('user_settings', [
           'page' => 'user_settings',
-          'user' => $user
+          'user' => $user,
+          'profit' =>$profit,
+          'referrals' => $referrals
         ]);
     }
 
@@ -245,5 +256,31 @@ class UserController extends Controller
         return back()->with('failed','No any target address!');
       }
       return back()->with('success','successfully submitted the sales request! it may takes some times for confirming it.');
+    }
+
+    public function changepassword(Request $request){
+      Log::info('resetpassword');
+      $user_id = $request->input('id');
+      $password = $request->input('password');
+      $password_confirm = $request->input('password-confirmation');
+      Log::info($user_id);
+      Log::info($password);
+      Log::info($password_confirm);
+      if ($password == $password_confirm){
+          $user = User::where('id', $user_id)->first();
+          if (isset($user->id)){
+            $user->password = bcrypt($password);
+            $user->save();
+            $user = $user->toArray();
+            $user['password'] = $password;
+            Mail::send('emails.forgetpassword', $user, function($message) use ($user) {
+                $message->to($user['email']);
+                $message->subject('Site - Reset Password');
+            });
+            return back()->with('success', 'Your password successfully changed!');
+          }
+          return back()->with('failed', 'Your email is not registered yet!');
+      }
+      return back()->with('failed', 'Passwords are not match! Please input again!');
     }
 }

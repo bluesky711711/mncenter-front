@@ -56,48 +56,7 @@
 <!--Start Part-2-->
 
 
-<script>
-$(document).ready(function(){
-$(".same").click(function(){
- var sliderid = $(this).attr("id");
 
-  var n = sliderid.split('-');
-var indid = (n[1]);
-
-$( ".openSlide" ).slideUp( "fast", function() {
-$( ".tabActive" ).removeClass( "tabActive" );
-
-});
-
-$( "#1stslide-" + indid ).slideDown( "fast", function() {
-$( "#atab-" + indid ).removeClass( "tabinActive").addClass("tabActive");
-
-});
-
-
-
-});
-});
-</script>
-<script type="text/javascript">
-  $(function(){
-    SyntaxHighlighter.all();
-  });
-  $(window).load(function(){
-    $('.flexslider').flexslider({
-      animation: "fade",
-      start: function(slider){
-        $('body').removeClass('loading');
-      }
-    });
-
-  $('ul.nav li.dropdown').hover(function() {
-$(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
-}, function() {
-$(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
-});
-  });
-</script>
 
 
 
