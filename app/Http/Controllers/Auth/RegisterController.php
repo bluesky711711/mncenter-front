@@ -86,6 +86,7 @@ class RegisterController extends Controller
 
         Mail::send('emails.activation', $user, function($message) use ($user) {
             $message->to($user['email']);
+            $message->from('info@mncenter.online');
             $message->subject('Site - Activation Code');
         });
         return redirect()->to('login')->with('warning',"Resent successfully!");
@@ -118,6 +119,7 @@ class RegisterController extends Controller
 
             Mail::send('emails.activation', $user, function($message) use ($user) {
                 $message->to($user['email']);
+                $message->from('info@mncenter.online');
                 $message->subject('Site - Activation Code');
             });
 
@@ -178,6 +180,7 @@ class RegisterController extends Controller
         $user['password'] = $password;
         Mail::send('emails.forgetpassword', $user, function($message) use ($user) {
             $message->to($user['email']);
+            $message->from('info@mncenter.online');
             $message->subject('Site - Reset Password');
         });
         return back()->with('success', 'We have sent password to your email!');
