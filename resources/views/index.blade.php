@@ -9,7 +9,7 @@
           <img src="/img/banner1.jpg" alt="banner" />
           <div class="flex-caption">
             <h3>SHARED MASTERNODES</h3>
-            <p>MN.Center offers services for splitting/sharing. Masternodes are servers that operate blockchain technology and gets rewards by doing so. Get your seat and join in on the rewards!</p>
+            <p>MN.Center offers services for splitting/sharing Masternodes rewards. Masternodes are servers that operate blockchain technology and gets rewards by doing so. Get your seat and join in on the rewards!</p>
             <a class="banner-link" href="#">Get your seats!</a>
           </div>
         </li>
@@ -17,8 +17,8 @@
           <img src="/img/banner2.jpg" alt="banner2" />
           <div class="flex-caption">
             <h3>SHARED MASTERNODES</h3>
-            <p>MN.Center offers services for splitting/sharing. Masternodes are servers that operate blockchain technology and gets rewards by doing so. Get your seat and join in on the rewards!</p>
-            <a class="banner-link" href="#">Get your seats!</a>
+            <p>MN.Center offers services for splitting/sharing Masternodes rewards. Masternodes are servers that operate blockchain technology and gets rewards by doing so. Get your seat and join in on the rewards!</p>
+            <a class="banner-link" href="#">Get your Seats!</a>
           </div>
         </li>
       </ul>
@@ -39,10 +39,10 @@
           mncenter
         </h4>
         <p class="det-text">
-          If you don't have enough coins to start Masternode, you can join Shared Masternode. You can invest your coins and take as much as you want seats in Shared Masternode. Based on number of your seats in Shared Masternode, you will share a Masternode reward.
+          If you don't have enough coins to start Masternode, you can join Shared Masternode with MNcenter. You can participate and take as much seats as you want in Shared Masternode on MNcenter.online. Based on number of your Seats in Shared Masternode, you will be able to have a share in  a Masternode reward of the masternode coin you participated in.
         </p>
 
-        <a class="join-btn" href="#">Join us Now!</a>
+        <a class="join-btn" href="/register">Join us Now!</a>
 
       </div>
 
@@ -67,7 +67,7 @@
      <div class="offer-icon"> <img src="img/offer-icon1.png" alt="1"></div>
      <div class="offer-text">
        <h6>Don't have enough for an MN?	</h6>
-       <p>You can have seats in more than one coin's Masternode.</p>
+       <p>You can have Seats in more than one coin's Masternode.</p>
      </div>
      <div class="clearfix"></div>
      </div>
@@ -75,8 +75,8 @@
      <div class="offer-box">
      <div class="offer-icon"> <img src="img/offer-icon2.png" alt="2"></div>
      <div class="offer-text">
-       <h6>Instant Payout	</h6>
-       <p>Masternode reward will be instantly paid out after it is confirmed.</p>
+       <h6>Weekly Payout	</h6>
+       <p>Masternode reward will be  paid out weekly every Sunday.</p>
      </div>
      <div class="clearfix"></div>
      </div>
@@ -153,12 +153,12 @@
               </div>
               <p>
 
-                Studies have shown that many people today are using same or slightly modified passwords for many different sites. For us, security is a top priority. That is why we do not store the password of your account. Actually, your password is not known to us and your
+                Studies have shown that many people today are using the same or slightly modified passwords for many different sites. For us, security is a top priority. That is why we do not store the password of your account. Actually, your password is not known to us and your
                 account is safe. </p>
                 <!-- We prefer to use usernames rather than email addresses, as they are getting more and more important today. However, to increase security, -->
                 <p> We use a username and password for log in. In this way, you can make totally unique login credentials only for our website. </p>
 
-                <p>Register to the site can be done only from a verified Email address. </p>
+                <p>Registering to the site can be done only from a verified Email address. </p>
                   <!-- <p>By default, two-factor authentication is enabled. </p> -->
                   <div class="clearfix"></div>
                 </li>
@@ -167,14 +167,13 @@
                   <div class="tab-image">
                     <img src="img/deposite.png" alt="deposits">
                   </div>
-                    <p>Studies have shown that many people today are using same or slightly modified passwords for many different sites. For us, security is a top priority. That is why we do not store the password of your account. Actually, your password is not known to us and your
-                      account is safe. </p>
-                                  <!-- We prefer to use usernames rather than email addresses, as they are getting more and more important today. However, to increase security, -->
-                    <p> We use a username and password for log in. In this way, you can make totally unique login credentials only for our website. </p>
-
-                    <p>Register to the site can be done only from a verified Email address. </p>
-
-                      <!-- <p>By default, two-factor authentication is enabled.</p> -->
+                    <p>Please check the list of Masternodes we are supporting.
+Go to the Balance page and click on Deposit action.
+Your unique address will be generated and you can send coins to it. You can always use it for that coin. It will not be changed in the future.
+You can follow deposit transaction confirmations on the Deposit history page. After a deposit transaction is confirmed, your balance will be updated.
+ Then you can add coins to the Queue for Masternode. A Seat size is defined for each coin. Each Seat defines a minimum amount of coins that can participate in one Masternode.
+When the Queue has enough coins for Masternode collateral transaction, Masternode will be created. Queues work on the FIFO (First In First Out) method.</p>
+                                
                       <div class="clearfix"></div>
                     </li>
 
@@ -182,15 +181,15 @@
                       <div class="tab-image">
                         <img style="padding-top:30px;" src="img/payment.png" alt="payment">
                       </div>
-                      <p>After the Masternode reward transaction is confirmed, it will be distributed automatically to all Masternode seat owners. </p>
+                      <p>After the Masternode reward transaction is confirmed, it will be distributed automatically to all Masternode seat owners Every Week(Sunday). </p>
 
-                      <p>The reward is distributed to seat owners on a percentage basis. If someone participates in one Masternode with 100 coins and the Collateral transaction requires 1000 coins, then seat owner is participating with 10%. Thus, the reward will be 10% of the total Masternode reward. </p>
+                      <p>The rewards are distributed to Seat owners on a percentage basis. If someone participates in one Masternode with 100 coins and the Collateral transaction requires 1000 coins, then Seat owner is participating with 10%. Thus, the reward will be 10% of the total Masternode reward. </p>
 
                       <p>Our fee will be charged to each seat owner. If someone is receiving 10% of the Masternode reward, our fee will be 1-10%. </p>
 
                       <p>Example: the fee is 5% percentage for one coin, the seat owner is receiving 2 coins, our fee will be 0.1 of the coin. </p>
 
-                      <p>Our fee system is highly configurable, and can differ on the coin, Masternode, or user level. A fee range can be 1-10 </p>
+                      <p>Our fee system is highly configurable, and can differ on the coin, Masternode, or user level. A fee range can be 1-10% </p>
                       <div class="clearfix"></div>
                     </li>
 
@@ -198,7 +197,7 @@
                       <div class="tab-image">
                         <img src="img/ithdrwls3.png" alt="withdrawals">
                       </div>                      >
-                      <p>If coins are not saled for Masternode, they can be withdrawn. but you must wait until there will be replacing amount. </p>
+                      <p>If coins are not sold for Masternode, they can be withdrawn. but you must wait until there will be a replacing amount. </p>
                       <p>If coins are locked in Masternode, please contact administrator via email or phone: </p>
                       <div class="clearfix"></div>
 
@@ -228,7 +227,7 @@
                       <ul>
                         <li class="same" id="tab-1"><a class="tabActive" id="atab-1" href="javascript:void(0)">What are your fees?  <span class="icon"> <img src="img/arrow-up.png"></span></a>
                           <div id="1stslide-1" class="openSlide">
-                            <p>There are no recurring fees. Initially, Goldnode takes place and reserves seats in each IMO for setup, installation, maintenance and other Goldnode services costs. The amount of seats is determined for each IMO after each Masternodes costs calculation. The seats we take in the masternode are compensated in the price we display on Goldnode meaning that you pay approximately 5-15% extra per seat (depending on the size of the masternode).</p>
+                            <p>There are no recurring fees. The amount of Seats is determined for each Coin after each Masternodes costs calculation. </p>
                           </div>
                         </li>
                         <li class="same" id="tab-2"><a class="tabinActive" id="atab-2" href="javascript:void(0)">What are Masternodes? <span class="icon"> <img src="img/arrow-down.png"></span></a>
@@ -238,7 +237,7 @@
                         </li>
                         <li class="same" id="tab-3"><a class="tabinActive" id="atab-3" href="javascript:void(0)">What is a Shared Masternode? <span class="icon"> <img src="img/arrow-down.png"></span></a>
                           <div id="1stslide-3" class="openSlide" style="display:none;">
-                            <p>A Shared Masternode is a Masternode managed by MN.Center where participants can get in on a share of the rewards. The masternode is divided into seats (most often 100 seats) and Goldnode have a Initial Masternode offer with a deadline to sell all these seats. By participating in a IMO (Initial Masternode Offering) and buy seats you get a share in the Shared Masternode. So instead of having all the assets to start your own Masternode, MN.Center offers you the service to share a part of a masternode with others - and by this effectivly lower the entry point. MN.Center also manages and monitors the operations of the masternode to make sure it runs smootly.</p>
+                            <p>A Shared Masternode is a Masternode managed by MNCenter.online  where participants can get in on a share of the rewards. The masternode is divided into Seats (most often 100 seats).By participating on MNCenter.online and buy Seats you get a share in the Shared Masternode Reward. So instead of having all the coins(assets) to start your own Masternode, MNCenter.online offers you the service to share a part of a masternode with others  and by this effectively lower the entry point. MNCenter.online also manages and monitors the operations of the masternode to make sure it runs smoothly.</p>
                           </div>
                         </li>
 
@@ -251,7 +250,7 @@
                         <li class="same" id="tab-5"><a class="tabinActive" id="atab-3" href="javascript:void(0)">What is Proof of Work (PoW)? <span class="icon"> <img src="img/arrow-down.png"></span></a>
                           <div id="1stslide-5" class="openSlide" style="display:none;">
                             <p>
-                              A proof-of-work (PoW) system (or protocol, or function) is an economic measure to deter denial of service attacks and other service abuses such as spam on a network by requiring some work from the service requester, usually meaning processing time by a computer. The concept was invented by Cynthia Dwork and Moni Naor as presented in a 1993 journal article.[1] The term "Proof of Work" or POW was first coined and formalized in a 1999 paper by Markus Jakobsson and Ari Juels.[2] An early example of the proof-of-work system used to give value to a currency is the shell money of the Solomon Islands[citation needed].
+                              A proof-of-work (PoW) system (or protocol, or function) is an economic measure to deter denial of service attacks and other service abuses such as spam on a network by requiring some work from the service requester, usually meaning processing time by a computer. The concept was invented by Cynthia Dwork and Moni Naor as presented in a 1993 journal article.[1] The term "Proof of Work" or POW was first coined and formalized in a 1999 paper by Markus Jakobsson and Ari Juels.[2] An early example of the proof-of-work system used to give value to a currency is the shell money of the Solomon Islands.
                             </p>
                           </div>
                         </li>

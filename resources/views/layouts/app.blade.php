@@ -137,12 +137,8 @@
       <div class="container">
         <p class="copy">Copyright 2018 | All rights reserved. </p>
         <ul class="fooyet-social">
-          <li> <a href="#"><i class="fab fa-facebook-f"></i></a></li>
-          <li> <a href="#"><i class="fab fa-twitter"></i></a></li>
-          <li> <a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-          <li> <a href="#"><i class="fab fa-google-plus-g"></i></a></li>
-          <li> <a href="#"><i class="fab fa-youtube"></i></a></li>
-
+          <li> <a href="https://www.facebook.com/MNcenter-356799748397050/"><i class="fab fa-facebook-f"></i></a></li>
+          <li> <a href="https://discord.gg/6M5DZf"><i class="fab fa-discord"></i></a></li>
         </ul>
         <div class="clearfix"></div>
       </div>
