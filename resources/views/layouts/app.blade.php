@@ -135,15 +135,24 @@
     <!--Start Part-5-->
     <!--Start Footer-->
     <footer>
+      <style>
+      .terms{
+        color:#a4a3a3;
+      }
+      .terms:hover{
+        color:#fff;
+        cursor: pointer;
+      }
+      </style>
       <div class="container">
         <p class="copy">Copyright 2018 | All rights reserved. </p>
+        <p style="text-align:center;"><a href="/terms" class="terms" >Terms and conditions</a> | <a href="/policy" class="terms" >Privacy Policy.</a> </p>
         <ul class="fooyet-social">
           <li> <a href="#"><i class="fab fa-facebook-f"></i></a></li>
           <li> <a href="#"><i class="fab fa-twitter"></i></a></li>
           <li> <a href="#"><i class="fab fa-linkedin-in"></i></a></li>
           <li> <a href="#"><i class="fab fa-google-plus-g"></i></a></li>
           <li> <a href="#"><i class="fab fa-youtube"></i></a></li>
-
         </ul>
         <div class="clearfix"></div>
       </div>
