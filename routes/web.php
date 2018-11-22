@@ -18,6 +18,15 @@ Auth::routes();
 Route::get('user/activation/{token}', 'Auth\RegisterController@userActivation');
 
 Route::get('/', 'HomeController@index')->name('index');
+
+Route::get('/terms', function(){
+  return view('terms');
+});
+
+Route::get('/policy', function(){
+  return view('policy');
+});
+
 Route::get('/home', 'HomeController@index')->name('index');
 Route::get('/faq', 'HomeController@faq')->name('faq');
 Route::get('/masternodes', 'MasternodeController@coins')->name('masternodecoins');
@@ -43,7 +52,7 @@ Route::post('/2fa','PasswordSecurityController@enable2fa')->name('enable2fa');
 Route::post('/disable2fa','PasswordSecurityController@disable2fa')->name('disable2fa');
 
 Route::get('/2faVerify', function(){
-return redirect('/');  
+return redirect('/');
 });
 Route::post('/2faVerify', function () {
 return redirect(URL()->previous());
