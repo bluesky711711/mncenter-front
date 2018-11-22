@@ -24,7 +24,9 @@ class MasternodeController extends Controller
   */
   public function __construct()
   {
-    //$this->middleware('auth');
+    if (Auth::guest()){
+        $this->middleware(['2fa']);
+    }
     date_default_timezone_set('UTC');
   }
 
@@ -126,7 +128,7 @@ class MasternodeController extends Controller
       $sales = Sale::where('masternode_id', $masternode->id)->get();
       $saled = 0;
       foreach ($sales as $sale) {
-        $saled = $total + $sale->sales_amount;
+        $saled = $saled + $sale->sales_amount;
       }
       $masternode->seat_amount = $saled;
       $masternode->empty_seats = $masternode->total_seats - $masternode->seat_amount;

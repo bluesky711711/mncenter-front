@@ -42,7 +42,7 @@
           If you don't have enough coins to start Masternode, you can join Shared Masternode. You can invest your coins and take as much as you want seats in Shared Masternode. Based on number of your seats in Shared Masternode, you will share a Masternode reward.
         </p>
 
-        <a class="join-btn" href="#">Join us Now!</a>
+        <a class="join-btn" href="/register">Join us Now!</a>
 
       </div>
 

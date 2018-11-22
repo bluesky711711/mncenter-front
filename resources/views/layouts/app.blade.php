@@ -109,6 +109,7 @@
                       <li><a href="/withdrawal_history">Withdrawal History</a></li>
                       <li><a href="/reward_history">Reward History</a></li>
                       <li><a href="/user_settings">User settings	</a></li>
+                      <li><a href="/2fa">Security setting</a></li>
                       <li><a href="#" onclick="Logout(event)">Logout</a></li>
                       @else
                       <li><a href="/login">Sign in</a></li>

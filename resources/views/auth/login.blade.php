@@ -73,7 +73,7 @@
   <div class="clearfix"></div>
 </section>
 <script>
-function Resend(){
+function Resend(){  
   @if ($email = Session::get('email'))
     $('#resend_email').val("{{$email}}");
     $('#form_resend').submit();

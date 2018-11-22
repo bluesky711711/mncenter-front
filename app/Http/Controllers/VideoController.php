@@ -17,6 +17,7 @@ class VideoController extends Controller
     public function __construct()
     {
         //$this->middleware('auth');
+        $this->middleware(['auth', '2fa']);
         date_default_timezone_set('UTC');
     }
 
