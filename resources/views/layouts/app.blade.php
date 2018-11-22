@@ -146,7 +146,7 @@
       </style>
       <div class="container">
         <p class="copy">Copyright 2018 | All rights reserved. </p>
-        <p style="text-align:center;"><a href="/terms" class="terms" >Terms and conditions</a> | <a href="/policy" class="terms" >Privacy Policy.</a> </p>
+        <p style="text-align:center;display:inline; width:258px; left:50%; margin-left:-330px;position:relative"><a href="/terms" class="terms" >Terms and conditions</a> | <a href="/policy" class="terms" >Privacy Policy.</a> </p>
         <ul class="fooyet-social">
           <li> <a href="#"><i class="fab fa-facebook-f"></i></a></li>
           <li> <a href="#"><i class="fab fa-twitter"></i></a></li>
