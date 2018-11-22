@@ -36,3 +36,15 @@ Route::post('/buyseats', 'UserController@buyseats')->name('buyseats');
 Route::post('/resendToken', 'Auth\RegisterController@resendToken')->name('resendToken');
 Route::post('/forgetpassword', 'Auth\RegisterController@forgetpassword')->name('forgetpassword');
 Route::post('/changepassword', 'UserController@changepassword')->name('changepassword');
+
+Route::get('/2fa','PasswordSecurityController@show2faForm');
+Route::post('/generate2faSecret','PasswordSecurityController@generate2faSecret')->name('generate2faSecret');
+Route::post('/2fa','PasswordSecurityController@enable2fa')->name('enable2fa');
+Route::post('/disable2fa','PasswordSecurityController@disable2fa')->name('disable2fa');
+
+Route::get('/2faVerify', function(){
+return redirect('/');  
+});
+Route::post('/2faVerify', function () {
+return redirect(URL()->previous());
+})->name('2faVerify')->middleware('2fa');

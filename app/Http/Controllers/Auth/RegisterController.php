@@ -74,7 +74,7 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function resendToken(Request $request){
+      public function resendToken(Request $request){
       $email = $request->input('resend_email');
       Log::info($email);
       $user = User::where('email', $email)->first();
