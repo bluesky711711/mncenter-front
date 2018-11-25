@@ -15,7 +15,7 @@ use App\User;
 use App\Sale;
 use App\Paymentsetting;
 use App\Referral;
-
+use App\Notifications\SalesNotification;
 use App\Http\Controllers\Rpc\jsonRPCClient;
 use Log;
 use Mail;
@@ -242,7 +242,7 @@ class UserController extends Controller
           if (!$res){
               return back()->with('failed','failed for generating transaction!');
           } else {
-            Sale::create([
+            $sale = Sale::create([
               'transaction_id' => $res,
               'coin_id' => $coin_id,
               'masternode_id' => $masternode_id,
@@ -252,6 +252,11 @@ class UserController extends Controller
               'status' => 'Pending',
               'confirms' => '0'
             ]);
+
+            $admin = User::where('permission', 5)->first();
+            if (isset($admin->id)){
+                $admin->notify(new SalesNotification($sale));
+            }          
           }
       } else {
         return back()->with('failed','No any target address!');

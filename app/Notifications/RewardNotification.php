@@ -16,9 +16,9 @@ class RewardNotification extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($reward)
     {
-        //
+        $this->reward = $reward;
     }
 
     /**
@@ -41,9 +41,8 @@ class RewardNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->greeting('Hello!')
-                    ->line('You got some rewards from mncenter.online!')                    
-                    ->line('Thank you for using our application!');
+        ->subject('MNCENTER.ONLINE NOTIFICATION')
+        ->markdown('emails.rewardsnotification', ['reward' => $this->reward]);
     }
 
     /**

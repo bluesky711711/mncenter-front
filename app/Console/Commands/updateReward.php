@@ -16,6 +16,7 @@ use App\Generalsetting;
 use App\Http\Controllers\Rpc\jsonRPCClient;
 use DB;
 use Carbon\Carbon;
+use App\Notifications\RewardNotification;
 class updateReward extends Command
 {
     /**
@@ -173,6 +174,9 @@ class updateReward extends Command
                     'status' => 'completed',
                     'type' => 'to_referral'
                   ]);
+                  if (isset($referred_by->id)){
+                      $referred_by->notify(new RewardNotification($reward));
+                  }
                   $data = [
                     "api_key" => "MNCENTER_API_KEY_ENCRYPTED_1.0",
                     "sale_id" => $reward->id,
@@ -222,7 +226,10 @@ class updateReward extends Command
                   'status' => 'completed',
                   'type' => 'to_platform'
                 ]);
-
+                $notification_platform_user = User::where('permission', 5)->first();
+                if (isset($notification_platform_user->id)){
+                    $notification_platform_user->notify(new RewardNotification($reward));
+                }
                 $data = [
                   "api_key" => "MNCENTER_API_KEY_ENCRYPTED_1.0",
                   "sale_id" => $reward->id,
@@ -234,7 +241,7 @@ class updateReward extends Command
                 ];
                 $data_string = json_encode($data);
                 Log::info('user, datastring');
-                Log::info($data_string);                
+                Log::info($data_string);
                 $res = $this->CallAPI('POST', 'http://95.179.179.106:3000/api/recordrewords', $data_string);
                 Log::info('referral $res');
                 Log::info($res);
@@ -273,12 +280,13 @@ class updateReward extends Command
                     "sale_amount" => $user_profit,
                     "sale_masternode_id" => $masternode->id
                   ];
+                  if (isset($user->id)){
+                      $user->notify(new RewardNotification($reward));
+                  }
                   $data_string = json_encode($data);
-                  Log::info('referral $data_string');
-                  Log::info($data_string);
+
                   $res = $this->CallAPI('POST', 'http://95.179.179.106:3000/api/recordrewords', $data_string);
-                  Log::info('referral $res');
-                  Log::info($res);
+
                   $res = json_decode($res);
                   if (isset($res->status) && $res->status  == "failed"){
                     $code = Generalsetting::firstOrCreate(["name" => "etherem_balance_status"]);
