@@ -57,13 +57,14 @@ class updateWallet extends Command
         $address = $wallet->wallet_address;
         if ($wallet->wallet_address != ''){
           $addresses = $client->listaddressgroupings();
-
+          if (count($addresses) > 0){
           foreach ($addresses as $item) {
             foreach ($item as $address){
               if ( strtolower($address[0]) == strtolower($wallet->wallet_address)){
                 $balance = $address[1];
               }
             }
+          }
           }
         }
         if (floatval($balance) > 0 || $wallet->wallet_address == '' || $wallet->wallet_address == NULL){

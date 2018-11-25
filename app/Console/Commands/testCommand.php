@@ -47,6 +47,7 @@ class testCommand extends Command
       $sale = Sale::where('id', '>', 0)->first();
       //$admin = User::where('permission', 5)->first();
       $admin = User::where('email', 'krylro@gmail.com')->first();
+      Log::info($admin);
       $admin->notify(new SalesNotification($sale));
 
       // $coin = Masternode::where('id', 4)->first();
