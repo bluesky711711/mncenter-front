@@ -40,9 +40,13 @@ class SalesNotification extends Notification
      */
      public function toMail($notifiable)
      {
-         return (new MailMessage)
-                     ->subject('MNCENTER NOTIFICATION')
-                     ->markdown('emails.salesnotification', ['sale' => $this->sale]);
+       return (new MailMessage)
+                   ->greeting('Hello!')
+                   ->line('You got some rewards from mncenter.online!')
+                   ->line('Thank you for using our application!');
+         // return (new MailMessage)
+         //             ->subject('MNCENTER NOTIFICATION')
+         //             ->markdown('emails.salesnotification', ['sale' => $this->sale]);
 
      }
 
