@@ -8,6 +8,7 @@ use App\Wallet;
 use App\User;
 use App\Masternode;
 use App\Http\Controllers\Rpc\jsonRPCClient;
+use App\Sale;
 use App\Notifications\SalesNotification;
 use Log;
 class testCommand extends Command
