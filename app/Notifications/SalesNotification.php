@@ -42,7 +42,7 @@ class SalesNotification extends Notification
      {
          return (new MailMessage)
                      ->subject('MNCENTER NOTIFICATION')
-                     ->markdown('mail.welcome.index', ['sale' => $this->sale]);
+                     ->markdown('emails.salesnotification', ['sale' => $this->sale]);
 
      }
 
