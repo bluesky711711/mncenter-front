@@ -41,9 +41,8 @@ class SalesNotification extends Notification
      public function toMail($notifiable)
      {
          return (new MailMessage)
-                     ->greeting('Hello Admin!')
-                     ->line('Someone just bought seats on mncenter.online! (Sale ID: '.$this->sale['id'].')')
-                     ->action('Check here:', 'http:://admin.mncenter.online/sales');
+                     ->subject('MNCENTER NOTIFICATION')
+                     ->markdown('mail.welcome.index', ['sale' => $this->sale]);
 
      }
 
