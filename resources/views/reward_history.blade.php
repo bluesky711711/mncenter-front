@@ -34,14 +34,14 @@
     @foreach ($rewards as $reward)
     <tr>
       <td>{{$reward->id}}</td>
-      <td>@if (isset($reward->coin->coin_name)) {{$reward->coin->coin_name}} @endif</td>
+      <td>{{$reward->coin->coin_name}}</td>
       <td>{{$reward->masternode->name}}</td>
-      <td>{{$$reward->coin->masternode_amount}}</td>
-      <td>{{$$reward->mn_total}}</td>
-      <td>{{$$reward->reward_amount}}</td>
-      <td>{{$$reward->reward_amount * 5 / 95}}</td>
-      <td>{{$$reward->status}}</td>
-      <td>{{$$reward->created_at}}</td>
+      <td>{{$reward->coin->masternode_amount}}</td>
+      <td>{{$reward->mn_total}}</td>
+      <td>{{$reward->reward_amount}}</td>
+      <td>{{$reward->reward_amount * 5 / 95}}</td>
+      <td>{{$reward->status}}</td>
+      <td>{{$reward->created_at}}</td>
     </tr>
     @endforeach
   </tbody>
