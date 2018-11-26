@@ -24,8 +24,7 @@
     <td>Masternode</td>
     <td>Coins in MN (%)</td>
     <td>MN Reward </td>
-    <td>Your Reward </td>
-    <td>Fee </td>
+    <td>Your Reward </td>    
     <td>Status</td>
     <td>Reward Date </td>
   </tr>
@@ -39,16 +38,17 @@
       <td>{{$reward->coin->masternode_amount}}</td>
       <td>{{$reward->mn_total}}</td>
       <td>{{$reward->reward_amount}}</td>
-      <td>{{$reward->reward_amount * 5 / 95}}</td>
       <td>{{$reward->status}}</td>
       <td>{{$reward->created_at}}</td>
     </tr>
     @endforeach
   </tbody>
 </table>
+@if (count($rewards) == 0)
 <div class="row" style="text-align:center;padding-top:20px">
   <span style="font-size:25px">No any rewards yet!</span>
 </div>
+@endif
 </div>
 
 </div>
