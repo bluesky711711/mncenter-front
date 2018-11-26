@@ -26,4 +26,9 @@ class Reward extends Model
 	{
 			return $this->belongsTo('App\Masternode');
 	}
+
+	public function coin()
+	{
+			return $this->belongsTo('App\Coin');
+	}
 }

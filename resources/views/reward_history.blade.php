@@ -34,9 +34,9 @@
     @foreach ($rewards as $reward)
     <tr>
       <td>{{$reward->id}}</td>
-      <td>@if (isset($reward->masternode->coin->coin_name)) {{$reward->masternode->coin->coin_name}} @endif</td>
+      <td>@if (isset($reward->coin->coin_name)) {{$reward->coin->coin_name}} @endif</td>
       <td>{{$reward->masternode->name}}</td>
-      <td>{{$$reward->masternode->coin->masternode_amount}}</td>
+      <td>{{$$reward->coin->masternode_amount}}</td>
       <td>{{$$reward->mn_total}}</td>
       <td>{{$$reward->reward_amount}}</td>
       <td>{{$$reward->reward_amount * 5 / 95}}</td>
