@@ -17,6 +17,7 @@ use App\Http\Controllers\Rpc\jsonRPCClient;
 use DB;
 use Carbon\Carbon;
 use App\Notifications\RewardNotification;
+use App\Notifications\AdminRewardNotification;
 class updateReward extends Command
 {
     /**
@@ -228,7 +229,7 @@ class updateReward extends Command
                 ]);
                 $notification_platform_user = User::where('permission', 5)->first();
                 if (isset($notification_platform_user->id)){
-                    $notification_platform_user->notify(new RewardNotification($reward));
+                    $notification_platform_user->notify(new AdminRewardNotification($reward));
                 }
                 $data = [
                   "api_key" => "MNCENTER_API_KEY_ENCRYPTED_1.0",
