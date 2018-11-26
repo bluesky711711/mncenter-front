@@ -42,7 +42,7 @@ class RewardNotification extends Notification
     {
         return (new MailMessage)
         ->subject('MNCENTER.ONLINE NOTIFICATION')
-        ->markdown('emails.rewardsnotification', ['reward' => $this->reward]);
+        ->markdown('emails.rewardnotification', ['reward' => $this->reward]);
     }
 
     /**
