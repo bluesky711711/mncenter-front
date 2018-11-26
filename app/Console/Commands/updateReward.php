@@ -132,7 +132,7 @@ class updateReward extends Command
         Log::info('$balance');
         Log::info($balance);
 
-        if ($balance < 10) continue;
+        if ($balance < 0.0001) continue;
 
         $profit = $balance - 0.0001;
 
