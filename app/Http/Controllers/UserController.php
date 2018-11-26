@@ -179,7 +179,7 @@ class UserController extends Controller
 
     public function reward_history()
     {
-        $rewards = Reward::where('user_id', Auth::user()->id)->where('type', '<>', 'to_platform');
+        $rewards = Reward::where('user_id', Auth::user()->id)->where('type', '<>', 'to_platform')->get();
         foreach ($rewards as $reward){
             $sales = Sale::where('user_id', Auth::user()->id)->where('masternode_id', $reward->masternode_id)->where('status', 'completed')->get();
             $sale_amount = 0;
