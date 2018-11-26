@@ -179,7 +179,7 @@ class UserController extends Controller
 
     public function reward_history()
     {
-        $rewards = Reward::where('user_id', Auth::user()->id);
+        $rewards = Reward::where('user_id', Auth::user()->id)->where('type', '<>', 'to_platform');
         foreach ($rewards as $reward){
             $sales = Sale::where('user_id', Auth::user()->id)->where('masternode_id', $reward->masternode_id)->where('status', 'completed')->get();
             $sale_amount = 0;
@@ -256,7 +256,7 @@ class UserController extends Controller
             $admin = User::where('permission', 5)->first();
             if (isset($admin->id)){
                 $admin->notify(new SalesNotification($sale));
-            }          
+            }
           }
       } else {
         return back()->with('failed','No any target address!');
