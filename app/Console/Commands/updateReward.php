@@ -158,8 +158,8 @@ class updateReward extends Command
               $referral_profit = $each_profit * 0.01;
               Log::info('$referred_by->id');
               Log::info($referred_by->id);
-              $referred_by = User::where('id', $referred_by->referred_by)->first();
-              $referral_wallet = Wallet::where('user_id', $referred_by->id)->where('coin_id', $coin->id)->first();
+              $referrer = User::where('id', $referred_by->referred_by)->first();
+              $referral_wallet = Wallet::where('user_id', $referrer->id)->where('coin_id', $coin->id)->first();
               if ($referral_wallet && $referral_wallet->wallet_address != ''){
 
                 $res = $client->sendtoaddress($referral_wallet->wallet_address, floatval(number_format($referral_profit, 8)));
@@ -168,20 +168,21 @@ class updateReward extends Command
                   $reward = Reward::create([
                     'user_id' => $sale->user_id,
                     'coin_id' => $coin->id,
-                    'referral_id' => $referred_by->id,
+                    'referral_id' => $referrer->id,
                     'transaction_id' => $res,
                     'masternode_id' => $masternode->id,
                     'reward_amount' => $referral_profit,
                     'status' => 'completed',
                     'type' => 'to_referral'
                   ]);
-                  if (isset($referred_by->id)){
-                      $referred_by->notify(new RewardNotification($reward));
+
+                  if (isset($referrer->id)){
+                      $referrer->notify(new RewardNotification($reward));
                   }
                   $data = [
                     "api_key" => "MNCENTER_API_KEY_ENCRYPTED_1.0",
                     "sale_id" => $reward->id,
-                    "user_email" => $referred_by->email,
+                    "user_email" => $referrer->email,
                     "sale_coin" => $coin->coin_name,
                     "sale_amount" => $user_profit,
                     "sale_masternode_id" => $masternode->id
@@ -260,6 +261,7 @@ class updateReward extends Command
                 Log::info('$user_profit');
                 Log::info($user_profit);
                 $res = $client->sendtoaddress($user_wallet->wallet_address, floatval(number_format($user_profit,8)));
+
                 if ($res != NULL){
                   $referrer_id = NULL;
                   if (isset($referred_by->id))  $referrer_id = $referred_by->referred_by;
@@ -273,6 +275,7 @@ class updateReward extends Command
                     'status' => 'completed',
                     'type' => 'to_user'
                   ]);
+
                   $data = [
                     "api_key" => "MNCENTER_API_KEY_ENCRYPTED_1.0",
                     "sale_id" => $reward->id,
