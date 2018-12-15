@@ -19,7 +19,7 @@
       <table width="100%" border="0" class="table table-striped">
         <thead>
           <tr>
-            <td>Withdrwa ID</td>
+            <td>Withdraw ID</td>
             <td>Coin </td>
             <td>Amount</td>
             <td>Status</td>
@@ -45,9 +45,7 @@
           @endif
         </tbody>
       </table>
-
     </div>
-
   </div>
   <div class="clearfix"></div>
 </section>

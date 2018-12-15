@@ -202,6 +202,16 @@ class UserController extends Controller
         ]);
     }
 
+    public function sales_history()
+    {
+        $sales = Sale::where('user_id', Auth::user()->id)->get();
+
+        return view('sales', [
+          'page' => 'sale_history',
+          'sales' => $sales,
+        ]);
+    }
+
     public function post_deposit(Request $request){
       $coin_id = $request->input('coin_id');
       $user = Auth::user();

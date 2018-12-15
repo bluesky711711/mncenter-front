@@ -38,6 +38,7 @@ Route::get('/settings', 'UserController@settings')->name('settings');
 Route::get('/deposit_history', 'UserController@deposit_history')->name('deposit_history');
 Route::get('/withdrawal_history', 'UserController@withdrawal_history')->name('withdrawal_history');
 Route::get('/reward_history', 'UserController@reward_history')->name('reward_history');
+Route::get('/sales', 'UserController@sales_history')->name('sales_history');
 Route::get('/user_settings', 'UserController@user_settings')->name('user_settings');
 
 Route::post('/withdraw', 'UserController@withdraw_post')->name('withdraw_post');

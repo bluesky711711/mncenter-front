@@ -105,6 +105,7 @@
                     @endif
                     <ul class="dropdown-menu header-dropdown-menu">
                       @if (!Auth::guest())
+                      <li><a href="/sales">My Sales</a></li>
                       <li><a href="/deposit_history">Deposit History</a></li>
                       <li><a href="/withdrawal_history">Withdrawal History</a></li>
                       <li><a href="/reward_history">Reward History</a></li>
@@ -123,7 +124,6 @@
                 </ul>
               </div>
             </div>
-
           </div>
         </div>
       </nav>
