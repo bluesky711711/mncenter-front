@@ -58,7 +58,11 @@ class updateTransaction extends Command
         $trans = $client->listtransactions("$user_id", 1000);
         if (!$trans) continue;
         foreach ($trans as $tran){
+            $reward = Reward::where('transaction_id', $tran['txid'])->first();
+            if (isset($reward->id)) continue;
+
             if ($tran['category'] == 'send') continue;
+
             $item = Transaction::where('transaction_hash', $tran['txid'])->where('user_id', $user_id)->where('type', 'DEPOSIT')->first();
             if (isset($item->id)){
               $item->confirms = $tran['confirmations'];

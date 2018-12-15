@@ -93,12 +93,9 @@ class updateSale extends Command
         $rpc_ip= $coin->rpc_ip;
         $client = new jsonRPCClient('http://'.$rpc_user.':'.$rpc_password.'@'.$rpc_ip.':'.$rpc_port.'/');
         $tran = $client->gettransaction($sale->transaction_id);
-        Log::info($tran);
-        $sale->confirms = $tran['confirmations'];
-        Log::info($tran['confirmations']);
-        if ($tran['confirmations'] > 5){
+        if ($sale->confirms <= 5 && $tran['confirmations'] > 5){
           $sale->status = "Completed";
-
+          $sale->save();
           $data = [
             "api_key" => "MNCENTER_API_KEY_ENCRYPTED_1.0",
             "sale_id" => $sale->id,
@@ -108,7 +105,10 @@ class updateSale extends Command
             "sale_masternode_id" => $sale->masternode_id
           ];
           $wallet = Wallet::where('coin_id', $sale->coin_id)->where('user_id', $sale->user_id)->first();
+
           $wallet->balance = floatval($wallet->balance) + floatval($tran['amount']);
+          Log::info('sale complete ------------');
+          Log::info($wallet->balance);
           $wallet->save();
           $data_string = json_encode($data);
           $res = $this->CallAPI('POST', 'http://95.179.179.106:3000/api/recordsales', $data_string);
@@ -118,6 +118,7 @@ class updateSale extends Command
             $code->save();
           }
         }
+        $sale->confirms = $tran['confirmations'];
         $sale->save();
       }
     }
