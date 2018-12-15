@@ -71,7 +71,11 @@ class updateTransaction extends Command
               $item->save();
             } else {
               $status = 'Pending';
-              if ($tran["confirmations"] > 5) $status="Completed";
+              if ($tran["confirmations"] > 5) {
+                  $status="Completed";
+                  $wallet->balance = floatval($wallet->balance) + floatval($tran['amount']);
+                  $wallet->save();
+              }
               Transaction::create([
                 'transaction_hash' => $tran['txid'],
                 'coin_id' => $coin->id,
