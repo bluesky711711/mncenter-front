@@ -64,16 +64,19 @@ class updateTransaction extends Command
             if (isset($item->id)){
               $item->confirms = $tran['confirmations'];
               if ($item->status != "Completed" && $tran["confirmations"] > 5) {
+                  $tran1 = $client->gettransaction($tran['txid']);
                   $item->status="Completed";
-                  $wallet->balance = floatval($wallet->balance) + floatval($tran['amount']);
+                  $wallet->balance = floatval($wallet->balance) + floatval($tran1['amount']);
                   $wallet->save();
               }
               $item->save();
             } else {
               $status = 'Pending';
-              if ($tran["confirmations"] > 5) {
+              $tran1 = $client->gettransaction($tran['txid']);
+              if ($tran1['amount'] <= 0) continue;
+              if ($tran1["confirmations"] > 5) {
                   $status="Completed";
-                  $wallet->balance = floatval($wallet->balance) + floatval($tran['amount']);
+                  $wallet->balance = floatval($wallet->balance) + floatval($tran1['amount']);
                   $wallet->save();
               }
               Transaction::create([
@@ -82,7 +85,7 @@ class updateTransaction extends Command
                 'user_id' => $user_id,
                 'type' => 'DEPOSIT',
                 'to_address' => $tran['address'],
-                'amount' => $tran['amount'],
+                'amount' => $tran1['amount'],
                 'confirms' => $tran["confirmations"],
                 'transaction_time' => $tran['time'],
                 'status' => $status
