@@ -117,7 +117,9 @@ class UserController extends Controller
       $rpc_port= $coin->rpc_port;
       $rpc_ip= $coin->rpc_ip;
       $client = new jsonRPCClient('http://'.$rpc_user.':'.$rpc_password.'@'.$rpc_ip.':'.$rpc_port.'/');
-
+      Log::info('----------withdraw------------');
+      Log::info($to_address);
+      Log::info($amount);
       $res = $client->sendtoaddress($to_address, floatval($amount));
       if ($res){
         $transaction = Transaction::create([
@@ -150,7 +152,7 @@ class UserController extends Controller
     public function deposit_history()
     {
         $user_id = Auth::user()->id;
-        $deposits = Transaction::where('type', 'DEPOSIT')->where('user_id', $user_id)->get();
+        $deposits = Transaction::where('type', 'DEPOSIT')->where('user_id', $user_id)->where('to_address', '!=', 'GVohUd8Wz4G81DRYQVBY2Q9NgTbtiJ2fzw')->get();
         Log::info($user_id);
         return view('deposit_history', [
           'page' => 'deposit_history',
